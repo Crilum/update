@@ -50,7 +50,7 @@ BLINK='\e[5m'
 REVVID='\e[7m'
 
 
-echo -e "${CYAN}${BOLD}\nWelcome to Adam's Update Script!\n${NC}"
+echo -e "${CYAN}${BOLD}\nWelcome to Crilum's Update Script!\n${NC}"
 
 if [ "$1" == "snaps" ]; then
    echo -e "${WHITE}Checking for snap updates. Please Wait...${NC}"
