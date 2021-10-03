@@ -49,21 +49,24 @@ BOLD='\e[1m'
 BLINK='\e[5m'
 REVVID='\e[7m'
 
+printf "${CYAN}${BOLD}\nWelcome to Crilum's Update Script!\n${NC}"
 
-echo -e "${CYAN}${BOLD}\nWelcome to Crilum's Update Script!\n${NC}"
-
-if [ "$1" == "snaps" ]; then
-   echo -e "${WHITE}Checking for snap updates. Please Wait...${NC}"
+if [ "$1" = "snaps" ]; then
+   printf "${WHITE}\nChecking for snap updates. Please Wait...${NC}"
+   sleep 1
    sudo snap refresh
     else
 if [ "$1" = "pi-apps" ]; then
-    $HOME/pi-apps/updater cli
+    printf "\n"
+    "$HOME"/pi-apps/updater cli
 else
+    printf "\n"
     sudo apt update
     sudo apt -y --allow-downgrades upgrade $1
-    if [ "$2" == "easter-egg" ]; then
-        echo -e "${LIPURPLE}${BOLD}\nThis update script has super cow powers!${NC}"
 fi
 fi
+if [ "$2" = "easter-egg" ]; then
+        printf "${LIPURPLE}${BOLD}\nThis update script has super cow powers!\n${NC}"
 fi
-echo -e "${GREEN}\nDone!${NC}"
+
+printf "${GREEN}\nDone!\n${NC}"
