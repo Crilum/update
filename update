@@ -25,7 +25,6 @@ LICYAN='\e[1;36m'
 
 #Background Color Variables
 
-#Color Variables
 BACKBLACK='\e[0;40m'
 BACKRED='\e[0;41m'
 BACKGREEN='\e[0;42m'
@@ -50,27 +49,19 @@ BOLD='\e[1m'
 BLINK='\e[5m'
 REVVID='\e[7m'
 
-str1="$1"
-str2="pi-apps"
-str4="$2"
-str3="easter-egg"
-str5="$3"
-str6="snaps"
-chars="/-\|"
-
 
 echo -e "${CYAN}${BOLD}\nWelcome to Adam's Update Script!\n${NC}"
 
-if [ "$str1" == "$str6" ]; then
+if [ "$1" == "snaps" ]; then
    echo -e "${WHITE}Checking for snap updates. Please Wait...${NC}"
    sudo snap refresh
     else
-if [ "$str1" = "$str2" ]; then
-    pi-apps update
+if [ "$1" = "pi-apps" ]; then
+    $HOME/pi-apps/updater cli
 else
     sudo apt update
     sudo apt -y --allow-downgrades upgrade $1
-    if [ "$str4" == "$str3" ]; then
+    if [ "$2" == "easter-egg" ]; then
         echo -e "${LIPURPLE}${BOLD}\nThis update script has super cow powers!${NC}"
 fi
 fi
