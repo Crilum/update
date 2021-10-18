@@ -51,6 +51,11 @@ REVVID='\e[7m'
 
 printf "${CYAN}${BOLD}\nWelcome to Crilum's Update Script!\n${NC}"
 
+if [ "$1" == "help" ]; then
+
+printf "\n${WHITE}Usage: ${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}ARGS${NC}${WHITE}\n\nThese are the available arguments for ${CYAN}${BOLD}update${NC}${WHITE}:\n\n${CYAN}${BOLD}update${NC} - ${WHITE}Updates apps with Apt\n${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}pi-apps${NC} - ${WHITE}Updates apps with Pi-Apps\n${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}snaps${NC} - ${WHITE}Updates snaps with snapd\n${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}help${NC} - ${WHITE}Displays this help\n"
+else
+
 if [ "$1" = "snaps" ]; then
    printf "${WHITE}\nChecking for snap updates. Please Wait...${NC}"
    sleep 1
@@ -67,6 +72,7 @@ fi
 fi
 if [ "$2" = "easter-egg" ]; then
         printf "${LIPURPLE}${BOLD}\nThis update script has super cow powers!\n${NC}"
+fi
 fi
 
 printf "${GREEN}\nDone!\n${NC}"
