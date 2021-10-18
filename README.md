@@ -45,7 +45,7 @@ You can use `update` like this:
 update - updates apps installed with Apt.
 update pi-apps - updates apps installed with pi-apps
 update snaps - updates apps installed with the snap store and snapd
-update help - Displays a help
+update help - Displays a help.
 ```
 
 # What if don't have Pi-Apps or snapd?
