@@ -1,5 +1,5 @@
 # update-app-script
-Updates apps from `Apt`, `Pi-Apps`, and the `Snap Store`.
+Updates apps from [`Apt`](https://en.wikipedia.org/wiki/APT_(software)), [`Pi-Apps`](https://github.com/Botspot/pi-apps), and the [`Snap Store`](https://snapcraft.io/).
 
 
 
@@ -31,6 +31,27 @@ Just remove the script:
 and you're done!
 
 
+# Usage
+You can use update like this:
+```
+update - updates apps installed with Apt.
+update pi-apps - updates apps installed with pi-apps
+update snaps - updates apps installed with the snap store and snapd
+```
 
-## Tip
-If you have another script in `/bin` named `update`, just rename the update script, and continue. (Just remember to change the name of the script in the install/uninstall scripts too!)
+# What if don't have Pi-Apps or snapd?
+Well, that's ok, if you have a Debian/Ubuntu based distro, just use the `update` command alone.
+
+But.. If you have a Raspberry Pi, I strongly reccomend Pi-Apps.
+
+You can install Pi-Apps like this:
+```
+wget -qO- https://raw.githubusercontent.com/Botspot/pi-apps/master/install | bash
+```
+
+Snaps are also pretty cool, they run an app in a container.
+```
+sudo apt install snapd
+```
+
+Note: The Snap Store in Ubuntu is just a GUI for `snapd`, so the update script will also update apps from there too. `snapd` is installed by default in Ubuntu.
