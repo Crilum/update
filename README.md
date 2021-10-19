@@ -61,8 +61,9 @@ update help - Displays a help.
 ```
 
 # What if I don't have Pi-Apps, snapd or Flatpak?
-Well, that's ok, if you have a Debian/Ubuntu based distro, just use the `update` command alone.
+Well, that's fine. If you have a Debian/Ubuntu based distro, just use the `update` command alone.
 
+But, if you want to install Pi-Apps, snapd, or Flatpak, you can do it like this:
 ### Pi-Apps
 
 If you have a Raspberry Pi, I strongly reccomend Pi-Apps.
