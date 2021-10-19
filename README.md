@@ -1,5 +1,5 @@
 # update-app-script
-Updates apps from [`Apt`](https://en.wikipedia.org/wiki/APT_(software)), [`Pi-Apps`](https://github.com/Botspot/pi-apps), and the [`Snap Store`](https://snapcraft.io/).
+Updates apps from [`Apt`](https://en.wikipedia.org/wiki/APT_(software)), [`Pi-Apps`](https://github.com/Botspot/pi-apps), [`flatpak`](https://www.flatpak.org/), and the [`Snap Store`](https://snapcraft.io/) ([`snapd`](https://snapcraft.io)).
 
 
 
@@ -43,12 +43,13 @@ and you're done!
 You can use `update` like this:
 ```
 update - updates apps installed with Apt.
-update pi-apps - updates apps installed with pi-apps
-update snaps - updates apps installed with the snap store and snapd
+update pi-apps - updates apps installed with pi-apps.
+update snaps - updates apps installed with the snap store and snapd.
+update flatpack - update Flatpak build instances.
 update help - Displays a help.
 ```
 
-# What if don't have Pi-Apps or snapd?
+# What if I don't have Pi-Apps, snapd or Flatpak?
 Well, that's ok, if you have a Debian/Ubuntu based distro, just use the `update` command alone.
 
 But.. If you have a Raspberry Pi, I strongly reccomend Pi-Apps.
@@ -57,10 +58,17 @@ You can install Pi-Apps like this:
 ```
 wget -qO- https://raw.githubusercontent.com/Botspot/pi-apps/master/install | bash
 ```
-
-Snaps are also pretty cool, they run an app in a container.
+### snapd
+Snaps run an app in a container.
+Install like this:
 ```
 sudo apt install snapd
 ```
 
 Note: The Snap Store in Ubuntu is just a GUI for `snapd`, so the update script will also update apps from there too. `snapd` is installed by default in Ubuntu.
+
+### Flatpak
+Install Flatpak like this:
+```
+sudo apt install flatpak
+```
