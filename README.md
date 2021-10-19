@@ -5,6 +5,12 @@ Updates apps from [`Apt`](https://en.wikipedia.org/wiki/APT_(software)), [`Pi-Ap
 
 
 # Install
+```
+curl "https://raw.githubusercontent.com/Crilum/update-app-script/main/install" | sudo bash
+```
+
+Or, if you prefer manual:
+
 Clone the repository:
 ```
  git clone https://github.com/Crilum/update-app-script/
