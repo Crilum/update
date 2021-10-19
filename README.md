@@ -72,6 +72,8 @@ You can install Pi-Apps like this:
 ```
 wget -qO- https://raw.githubusercontent.com/Botspot/pi-apps/master/install | bash
 ```
+Note: Pi-Apps is intended for use on the Raspberry Pi (Which has an ARM processor), running Raspberry Pi OS, Debian (Before Bullseye) or TwisterOS. 
+Most to all of the apps won't work on x86 or x64 Intel or AMD processors. 
 ### snapd
 Snaps run an app in a container.
 Install like this:
