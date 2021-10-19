@@ -1,5 +1,5 @@
 # update-app-script
-Updates apps from [`Apt`](https://en.wikipedia.org/wiki/APT_(software)), [`Pi-Apps`](https://github.com/Botspot/pi-apps), [`flatpak`](https://www.flatpak.org/), and the [`Snap Store`](https://snapcraft.io/) ([`snapd`](https://snapcraft.io)).
+Updates apps from [`Apt`](https://en.wikipedia.org/wiki/APT_(software)),  [`Pi-Apps`](https://github.com/Botspot/pi-apps),     [`flatpak`](https://www.flatpak.org/), and the [`Snap Store`](https://snapcraft.io/) ([`snapd`](https://snapcraft.io)).
 
 
 
@@ -9,6 +9,8 @@ Updates apps from [`Apt`](https://en.wikipedia.org/wiki/APT_(software)), [`Pi-Ap
 curl "https://raw.githubusercontent.com/Crilum/update-app-script/main/install" | sudo bash
 ```
 
+ ### Manual install 
+ <details> 
 Or, if you prefer manual:
 
 Clone the repository:
@@ -36,6 +38,10 @@ Remove the cloned repository (This is optional):
 rm /path/to/repo/directory/update-app-script
 ```
 
+</details>
+ 
+ 
+
 
 # Uninstall
 Just remove the script:
@@ -58,7 +64,9 @@ update help - Displays a help.
 # What if I don't have Pi-Apps, snapd or Flatpak?
 Well, that's ok, if you have a Debian/Ubuntu based distro, just use the `update` command alone.
 
-But.. If you have a Raspberry Pi, I strongly reccomend Pi-Apps.
+### Pi-Apps
+
+If you have a Raspberry Pi, I strongly reccomend Pi-Apps.
 
 You can install Pi-Apps like this:
 ```
