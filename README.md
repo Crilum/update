@@ -11,7 +11,6 @@ curl "https://raw.githubusercontent.com/Crilum/update-app-script/main/install" |
 
  ### Manual install 
  <details> 
-Or, if you prefer manual:
 
 Clone the repository:
 ```
