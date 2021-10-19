@@ -55,4 +55,4 @@ printf "\n${WHITE}Downloading ${CYAN}${BOLD}update${NC}${WHITE}...${NC}\n\n"
 sudo wget "https://raw.githubusercontent.com/Crilum/update-app-script/main/update"
 sudo chmod +x update
 
-printf "${GREEN}Done!${WHITE} try "${CYAN}${BOLD}update ${YELLOW}help${WHITE}" to learn how to use ${CYAN}${BOLD}update${WHITE}!${NC}"
+printf "${GREEN}Done!${WHITE} try \'${CYAN}${BOLD}update ${YELLOW}help${WHITE}\' to learn how to use ${CYAN}${BOLD}update${WHITE}!${NC}\n"
