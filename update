@@ -57,8 +57,8 @@ if [ "$1" == "help" ]; then
 elif [ "$1" == "all" ]; then 
     printf "\n\n${WHITE}Apt output:${NC}\n\n"
     sudo apt update
-    sudo apt -y --allow-downgrades upgrade $1
-    sudo apt autoremove
+    sudo apt -y upgrade
+    sudo apt -y autoremove
     printf "\n\n${WHITE}Pi-Apps output:${NC}\n"
     ~/pi-apps/updater cli-yes
     printf "\n\n${WHITE}Flatpak output:${NC}\n"
@@ -81,8 +81,8 @@ elif [ "$1" == "flatpak" ]; then
 else
     printf "\n${WHITE}Apt output:${NC}\n\n"
     sudo apt update
-    sudo apt -y --allow-downgrades upgrade $1
-    sudo apt autoremove
+    sudo apt -y upgrade $1
+    sudo apt -y autoremove
 fi
 
 if [ "$2" = "easter-egg" ]; then
