@@ -73,6 +73,7 @@ else
     printf "\n${WHITE}Apt output:${NC}\n\n"
     sudo apt update
     sudo apt -y --allow-downgrades upgrade $1
+    sudo apt autoremove
 fi
 
 if [ "$2" = "easter-egg" ]; then
