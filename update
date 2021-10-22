@@ -69,7 +69,7 @@ elif [ "$1" == "self-update" ]; then
    printf "\n${WHITE}Starting Self-Update...${NC}\n\n"
    curl "https://raw.githubusercontent.com/Crilum/update-app-script/main/install" | sudo bash
 elif [ "$1" = "snaps" ]; then
-   printf "${WHITE}\nChecking for snap updates. Please Wait...${NC}"
+   printf "${WHITE}\nChecking for snap updates. Please Wait...${NC}\n\n"
    sudo snap refresh
    
 elif [ "$1" = "pi-apps" ]; then
