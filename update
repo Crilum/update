@@ -56,7 +56,7 @@ if [ "$1" == "help" ]; then
    printf "\n${WHITE}Usage: ${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}ARGS${NC}${WHITE}\n\nThese are the available arguments for ${CYAN}${BOLD}update${NC}${WHITE}:\n\n${CYAN}${BOLD}update${NC} - ${WHITE}Updates apps with Apt\n${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}pi-apps${NC} - ${WHITE}Updates apps with Pi-Apps\n${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}snaps${NC} - ${WHITE}Updates snaps with snapd\n${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}flatpak${NC} - ${WHITE}Update flatpak build instances${NC}\n${CYAN}${BOLD}update ${YELLOW}${BOLD}self-update${NC} - ${WHITE}Updates the ${CYAN}${BOLD}update ${WHITE}script\n${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}help${NC} - ${WHITE}Displays this help\n"
 
 elif [ "$1" == "self-update" ]; then
-   printf "\n${WHITE}Starting Self-Update...${NC}\n"
+   printf "\n${WHITE}Starting Self-Update...${NC}\n\n"
    curl "https://raw.githubusercontent.com/Crilum/update-app-script/main/install" | sudo bash
 elif [ "$1" = "snaps" ]; then
    printf "${WHITE}\nChecking for snap updates. Please Wait...${NC}"
