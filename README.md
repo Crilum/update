@@ -45,7 +45,9 @@ rm /path/to/repo/directory/update-app-script
 # Uninstall
 Just remove the script:
 
-`sudo rm /bin/update`
+```
+sudo rm /bin/update
+```
 
 and you're done!
 
