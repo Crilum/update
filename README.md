@@ -54,6 +54,7 @@ and you're done!
 You can use `update` like this:
 ```
 update - Updates apps installed with Apt.
+update all - Updates apps on all supported systems.
 update pi-apps - Updates apps installed with pi-apps.
 update snaps - Updates apps installed with the snap store and snapd.
 update flatpak - Update Flatpak build instances.
