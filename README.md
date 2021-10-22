@@ -53,10 +53,11 @@ and you're done!
 # Usage
 You can use `update` like this:
 ```
-update - updates apps installed with Apt.
-update pi-apps - updates apps installed with pi-apps.
-update snaps - updates apps installed with the snap store and snapd.
-update flatpak - update Flatpak build instances.
+update - Updates apps installed with Apt.
+update pi-apps - Updates apps installed with pi-apps.
+update snaps - Updates apps installed with the snap store and snapd.
+update flatpak - Update Flatpak build instances.
+update self-update - Updates the update script
 update help - Displays a help.
 ```
 
