@@ -58,4 +58,4 @@ sudo wget -O update "https://raw.githubusercontent.com/Crilum/update-app-script/
 sudo chmod +x update
 
 printf "${GREEN}All finished installing!\n${WHITE}Try \'${CYAN}${BOLD}update ${YELLOW}help${WHITE}\' to learn how to use ${CYAN}${BOLD}update${WHITE}!${NC}\n"
-return 0
+exit 0
