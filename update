@@ -63,7 +63,7 @@ elif [ "$1" = "snaps" ]; then
    
 elif [ "$1" = "pi-apps" ]; then
     printf "\n${WHITE}Pi-Apps output:${NC}\n"
-    "$HOME"/pi-apps/updater cli
+    "$HOME"/pi-apps/updater cli-yes
 elif [ "$1" == "flatpak" ]; then
 printf "\n${WHITE}Flatpak output:${NC}\n"
 flatpak update
