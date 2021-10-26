@@ -62,7 +62,7 @@ elif [ "$1" == "all" ]; then
     printf "\n\n${WHITE}Pi-Apps output:${NC}\n"
     ~/pi-apps/updater cli-yes
     printf "\n${WHITE}npm output:${NC}\n"
-    npm update | grep -v npm WARN npm npm does not support Node.js v10.24.0 npm WARN npm You should probably upgrade to a newer version of node as we npm WARN npm "can't" make any promises that npm will work with this version. 
+    npm update
     printf "\n\n${WHITE}Flatpak output:${NC}\n"
     flatpak update
     printf "\n${WHITE}\nChecking for snap updates. Please Wait...${NC}\n\n"
