@@ -46,7 +46,7 @@ rm /path/to/repo/directory/update-app-script
 Just remove the script:
 
 ```
-sudo rm /bin/update
+sudo rm /usr/local/bin/update
 ```
 
 and you're done!
