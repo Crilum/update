@@ -61,6 +61,8 @@ elif [ "$1" == "all" ]; then
     sudo apt -y autoremove
     printf "\n\n${WHITE}Pi-Apps output:${NC}\n"
     ~/pi-apps/updater cli-yes
+    printf "\n${WHITE}npm output:${NC}\n"
+    npm update
     printf "\n\n${WHITE}Flatpak output:${NC}\n"
     flatpak update
     printf "\n${WHITE}\nChecking for snap updates. Please Wait...${NC}\n\n"
@@ -78,6 +80,9 @@ elif [ "$1" = "pi-apps" ]; then
 elif [ "$1" == "flatpak" ]; then
    printf "\n${WHITE}Flatpak output:${NC}\n"
    flatpak update
+elif [ "$1" == "npm" ]; then
+   printf "\n${WHITE}npm output:${NC}\n"
+   npm update
 else
     printf "\n${WHITE}Apt output:${NC}\n\n"
     sudo apt update
