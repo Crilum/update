@@ -69,9 +69,9 @@ update help - Displays a help.
 Well, that's fine. If you have a Debian/Ubuntu based distro, just use the `update` command alone.
 
 But, if you want to install Pi-Apps, snapd, or Flatpak, you can do it like this:
-### Pi-Apps
+- ### Pi-Apps
 
-If you have a Raspberry Pi, I strongly reccomend Pi-Apps.
+If you have a Raspberry Pi, I reccomend Pi-Apps.
 
 You can install Pi-Apps like this:
 ```
@@ -79,16 +79,15 @@ wget -qO- https://raw.githubusercontent.com/Botspot/pi-apps/master/install | bas
 ```
 Note: Pi-Apps is intended for use on the Raspberry Pi (Which has an ARM processor), running Raspberry Pi OS, Debian (Before Bullseye) or TwisterOS. 
 Most to all of the apps won't work on x86 or x64 Intel or AMD processors. 
-### snapd
-Snaps run an app in a container.
-Install like this:
+- ### snapd
+Install snapd like this:
 ```
 sudo apt install snapd
 ```
 
 Note: The Snap Store in Ubuntu is just a GUI for `snapd`, so the update script will also update apps from there too. `snapd` is installed by default in Ubuntu.
 
-### Flatpak
+- ### Flatpak
 Install Flatpak like this:
 ```
 sudo apt install flatpak
