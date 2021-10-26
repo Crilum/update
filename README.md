@@ -22,19 +22,19 @@ Or, if you have GitHub CLI:
 gh repo clone Crilum/update-app-script
 ```
 
-Copy the Update Script to `/bin/`:
+Copy the Update Script to `/usr/local/bin/`:
 ```
-cd update-app-script && sudo cp update /bin/
+cd update-app-script && sudo cp update /usr/local/bin/update
 ```
 
 Make it executable:
 ```
-sudo chmod +x /bin/update
+sudo chmod +x /usr/local/bin/update
 ```
 
 Remove the cloned repository (This is optional):
 ```
-rm /path/to/repo/directory/update-app-script
+rm /path/to/update-app-script
 ```
 
 </details>
