@@ -84,8 +84,8 @@ elif [ "$1" == "npm" ]; then
    printf "\n${WHITE}npm output:${NC}\n"
    npm update
 elif [ "$1" == "homebrew" ]
-printf "\n${WHITE}Homebrew output:${NC}\n"
-brew update
+   printf "\n${WHITE}Homebrew output:${NC}\n"
+   brew update
 else
     printf "\n${WHITE}Apt output:${NC}\n\n"
     sudo apt update
