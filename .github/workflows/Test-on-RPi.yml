@@ -1,5 +1,3 @@
-# This is a basic workflow to help you get started with Actions
-
 name: Test-on-RPi
 
 # Controls when the workflow will run
@@ -9,7 +7,6 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
   Test-install-on-RPi:
     # The type of runner that the job will run on
     runs-on: [self-hosted, linux, ARM64]
