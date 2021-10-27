@@ -54,7 +54,7 @@ printf "\n${WHITE}Installing dependencies with apt...${NC}\n\n"
 sudo apt install curl wget bash
 cd /usr/local/bin
 printf "\n${WHITE}Downloading ${CYAN}${BOLD}update${NC}${WHITE}...${NC}\n\n"
-sudo wget -O update "https://raw.githubusercontent.com/Crilum/update-app-script/main/update"
+sudo wget -O update "https://raw.githubusercontent.com/Crilum/update/main/update"
 sudo chmod +x update
 
 printf "${GREEN}All finished installing!\n${WHITE}Try \'${CYAN}${BOLD}update ${YELLOW}help${WHITE}\' to learn how to use ${CYAN}${BOLD}update${WHITE}!${NC}\n"
