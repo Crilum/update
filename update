@@ -73,7 +73,7 @@ elif [ "$1" == "self-update" ]; then
 elif [ "$1" = "snaps" ]; then
    printf "${WHITE}\nChecking for snap updates. Please Wait...${NC}\n\n"
    sudo snap refresh
-elif [ "$1" == "homebrew" ]
+elif [ "$1" == "homebrew" ]; then
    printf "\n${WHITE}Homebrew output:${NC}\n"
    brew update
    printf ""
