@@ -24,7 +24,7 @@ jobs:
           curl "https://raw.githubusercontent.com/Crilum/update-app-script/main/install-macos" | sudo bash
           echo "Here is where Update is:"
           gwhich update
-     - name: Test Update
-       run: |
+      - name: Test Update
+        run: |
           update help
           update homebrew
