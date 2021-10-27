@@ -23,5 +23,7 @@ jobs:
       - name: Run a multi-line script to install and test update
         run: |
           curl "https://raw.githubusercontent.com/Crilum/update-app-script/main/install" | sudo bash
+          echo "Here is where Update is:"
           which update
           /usr/local/bin/update help
+          update
