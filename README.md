@@ -6,7 +6,7 @@ Updates apps from [`Apt`](https://en.wikipedia.org/wiki/APT_(software)),  [`Pi-A
 
 # Install
 ```
-curl "https://raw.githubusercontent.com/Crilum/update-app-script/main/install" | sudo bash
+curl "https://raw.githubusercontent.com/Crilum/update/main/install" | sudo bash
 ```
 
 #### Manual install 
@@ -14,17 +14,17 @@ curl "https://raw.githubusercontent.com/Crilum/update-app-script/main/install" |
 
 Clone the repository:
 ```
- git clone https://github.com/Crilum/update-app-script/
+ git clone https://github.com/Crilum/update/
 ```
 
 Or, if you have GitHub CLI:
 ```
-gh repo clone Crilum/update-app-script
+gh repo clone Crilum/update/
 ```
 
 Copy the Update Script to `/usr/local/bin/`:
 ```
-cd update-app-script && sudo cp update /usr/local/bin/update
+cd update && sudo cp update /usr/local/bin/update
 ```
 
 Make it executable:
@@ -34,7 +34,7 @@ sudo chmod +x /usr/local/bin/update
 
 Remove the cloned repository (This is optional):
 ```
-rm /path/to/update-app-script
+rm /path/to/update
 ```
 
 </details>
