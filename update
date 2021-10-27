@@ -76,6 +76,7 @@ elif [ "$1" = "snaps" ]; then
 elif [ "$1" == "homebrew" ]
    printf "\n${WHITE}Homebrew output:${NC}\n"
    brew update
+   printf ""
 elif [ "$1" = "pi-apps" ]; then
     printf "\n${WHITE}Pi-Apps output:${NC}\n"
     ~/pi-apps/updater cli-yes
