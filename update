@@ -73,7 +73,9 @@ elif [ "$1" == "self-update" ]; then
 elif [ "$1" = "snaps" ]; then
    printf "${WHITE}\nChecking for snap updates. Please Wait...${NC}\n\n"
    sudo snap refresh
-   
+elif [ "$1" == "homebrew" ]
+   printf "\n${WHITE}Homebrew output:${NC}\n"
+   brew update
 elif [ "$1" = "pi-apps" ]; then
     printf "\n${WHITE}Pi-Apps output:${NC}\n"
     ~/pi-apps/updater cli-yes
@@ -83,9 +85,6 @@ elif [ "$1" == "flatpak" ]; then
 elif [ "$1" == "npm" ]; then
    printf "\n${WHITE}npm output:${NC}\n"
    npm update
-elif [ "$1" == "homebrew" ]
-   printf "\n${WHITE}Homebrew output:${NC}\n"
-   brew update
 else
     printf "\n${WHITE}Apt output:${NC}\n\n"
     sudo apt update
