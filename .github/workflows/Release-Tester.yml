@@ -18,4 +18,4 @@ jobs:
     steps:
       # Runs a set of commands using the runners shell
       - name: Activate Linux test
-        uses: ./.github/actions/Test-Update-Install-Linux.yml@latest
+        uses: ./.github/actions/Test-Update-Install-Linux/action.yml@latest
