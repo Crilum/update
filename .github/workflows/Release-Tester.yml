@@ -19,4 +19,3 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Activate Linux test
         uses: ./.github/workflows/Test-Update-Install-Linux.yml@latest
-          echo test, and deploy your project.
