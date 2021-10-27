@@ -19,10 +19,12 @@ jobs:
 
       # Runs a set of commands using the runners shell
       - name: Install Update
-        run: brew install gnu-which
-        run: curl "https://raw.githubusercontent.com/Crilum/update-app-script/main/install-macos" | sudo bash
-        run: echo "Here is where Update is:"
-        run: gwhich update
+        run: |
+         brew install gnu-which
+         curl "https://raw.githubusercontent.com/Crilum/update-app-script/main/install-macos" | sudo bash
+         echo "Here is where Update is:"
+         gwhich update
       - name: Test Update
-        run: update help
-        run: update homebrew
+        run: |
+         update help
+         update homebrew
