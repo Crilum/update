@@ -9,9 +9,9 @@ Updates apps from [`Apt`](https://en.wikipedia.org/wiki/APT_(software)),  [`Pi-A
 curl "https://raw.githubusercontent.com/Crilum/update/main/install" | sudo bash
 ```
 
-#### Manual install 
- <details> 
 
+ <details> 
+ <summary><b>If you want to install manually</b> | click to expand</summary>
 Clone the repository:
 ```
  git clone https://github.com/Crilum/update/
