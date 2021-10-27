@@ -93,3 +93,10 @@ Install Flatpak like this:
 ```
 sudo apt install flatpak
 ```
+
+## Todo
+
+- [ ] Make an Action that triggers a Release.
+- [ ] Make a Releases tesing system, so when I release an update GitHub Actions tests installation.
+- [ ] Create `Contributing.md`.
+- [ ] Create pull request templates.
