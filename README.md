@@ -61,6 +61,7 @@ update pi-apps - Updates apps installed with pi-apps.
 update npm - Updates all npm apps.
 update snaps - Updates apps installed with the snap store and snapd.
 update flatpak - Update Flatpak build instances.
+update homebrew - Updates apps installed with Homebrew.
 update self-update - Updates the update script
 update help - Displays a help.
 ```
