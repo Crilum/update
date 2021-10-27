@@ -52,7 +52,7 @@ REVVID='\e[7m'
 #Code
 printf "\n${WHITE}Installing dependencies with apt...${NC}\n\n"
 sudo apt install curl wget bash
-cd usr/local/bin
+cd /usr/local/bin
 printf "\n${WHITE}Downloading ${CYAN}${BOLD}update${NC}${WHITE}...${NC}\n\n"
 sudo wget -O update "https://raw.githubusercontent.com/Crilum/update-app-script/main/update"
 sudo chmod +x update
