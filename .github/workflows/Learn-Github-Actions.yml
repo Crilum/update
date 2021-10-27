@@ -24,5 +24,6 @@ jobs:
         run: |
           sudo apt install curl
           curl "https://raw.githubusercontent.com/Crilum/update-app-script/main/install" | sudo bash
-          /usr/local/bin/update
+          which update
+          /usr/bin/update
           /usr/local/bin/update help
