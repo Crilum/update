@@ -86,6 +86,8 @@ elif [ "$1" == "flatpak" ]; then
 elif [ "$1" == "npm" ]; then
    printf "\n${WHITE}npm output:${NC}\n"
    npm update
+elif [ "$1" == "pacman"]; then
+pacman -Syyu
 else
     printf "\n${WHITE}Apt output:${NC}\n\n"
     sudo apt update
