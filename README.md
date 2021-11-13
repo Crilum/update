@@ -75,7 +75,9 @@ Well, that's fine.
 
 - If you have a Debian/Ubuntu based distro, just use the `update` command alone.
 
-- If you have a Raspberry Pi:
+<hr>
+
+### To Install any of the other package managers and/or app stores:
 
   ### Pi-Apps
   
@@ -87,20 +89,22 @@ Well, that's fine.
   Note: Pi-Apps is intended for use on the Raspberry Pi (Which has an ARM processor), running Raspberry Pi OS, Debian (Before Bullseye) or TwisterOS. 
   Most to all of the apps won't work on x86 or x64 Intel or AMD processors. 
 
-- If you want a simple, container-based app store:
   ### snapd
+  
   Install snapd like this:
+
   ```
   sudo apt install snapd
   ```
   
   Note: The Snap Store in Ubuntu is just a GUI for `snapd`, so the update script will also update apps from there too. `snapd` is installed by default in Ubuntu.
 
-- ### Flatpak
-Install Flatpak like this:
-```
-sudo apt install flatpak
-```
+
+  ### Flatpak
+  Install Flatpak like this:
+  ```
+  sudo apt install flatpak
+  ```
 
 <hr>
 
