@@ -102,8 +102,12 @@ Install Flatpak like this:
 sudo apt install flatpak
 ```
 
+<hr>
+
+Note: I'm still working on this part of the readme, and I plan to add instructions for installing all package managers/app stores that you can use with update.
 ## Todo
 
 - [x] Make a Releases tesing system, so when I release an update GitHub Actions tests installation.
 - [ ] Create `Contributing.md`.
 - [ ] Create pull request templates.
+- [ ] Create a editable configuration for `all` argument
