@@ -99,6 +99,7 @@ update npm - Updates all npm packages.
 update snaps - Updates apps installed with the snap store and snapd.
 update flatpak - Updates Flatpak build instances.
 update homebrew - Updates apps installed with Homebrew.
+update pacman - Updates apps installed with pacman.
 update self-update - Updates the update script
 update help - Displays a help.
 ```
