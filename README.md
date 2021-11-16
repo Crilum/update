@@ -14,37 +14,70 @@ curl "https://raw.githubusercontent.com/Crilum/update/main/install" | sudo bash
  <details> 
  <summary><b>If you want to install manually</b> | click to expand</summary>
 
- <br>
+<h3>There are two different ways to download the script, the first one is easier, but you can use the second one if you want.</h3>
 
- Clone the repository:
-```
-git clone https://github.com/Crilum/update/
-```
+ <h4>Method 1. Use `wget` and download `update` directly, and copy the script to `/usr/local/bin/`:</h4>
+    
+ 
+1. Make sure `wget` is installed:
+     
+   ```
+   sudo apt install wget
+   ```  
+ 
+2. Download `update` with `wget`:
+   
+   ```
+   wget "https://raw.githubusercontent.com/Crilum/update/main/update"
+   ```  
+ 
+3. Move `update` to `/usr/local/bin/`:
+  
+   ``` 
+   sudo mv update /usr/local/bin/update
+   ```
+ 
+4. Make `update` executable:
+   
+   ``` 
+   sudo chmod +x /usr/local/bin/update
+   ``` 
+ ##
+ 
+<h4> Method 2. Use `git clone` and copy the script to `/usr/local/bin/`:</h4>
+     
+1. Clone the repository:
+  
+   ```
+   git clone https://github.com/Crilum/update/
+   ```
+  
+2. Or, if you have GitHub CLI:
+  
+   ```
+   gh repo clone Crilum/update/
+   ```
 
-Or, if you have GitHub CLI:
-```
-gh repo clone Crilum/update/
-```
+3. Copy the Update Script to `/usr/local/bin/`:
+  
+   ```
+   cd update && sudo cp update /usr/local/bin/update
+   ```
 
-Copy the Update Script to `/usr/local/bin/`:
-```
-cd update && sudo cp update /usr/local/bin/update
-```
+4. Make it executable:
+  
+   ```
+   sudo chmod +x /usr/local/bin/update
+   ```
 
-Make it executable:
-```
-sudo chmod +x /usr/local/bin/update
-```
+5. Remove the cloned repository (This is optional):
 
-Remove the cloned repository (This is optional):
-```
-rm /path/to/update
-```
+     ```
+     rm /path/to/update
+     ```
 
 </details>
  
- 
-
 
 # Uninstall
 Just remove the script:
