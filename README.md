@@ -1,6 +1,6 @@
 ![logo](https://github.com/Crilum/update/blob/main/Imgs/update_simple-100x100.png)
 # update
-update is a small script thet updates apps from [`Apt`](https://en.wikipedia.org/wiki/APT_(software)),  [`Pi-Apps`](https://github.com/Botspot/pi-apps),     [`flatpak`](https://www.flatpak.org/), [`homebrew`](https://brew.sh), [`NPM`](https://npmjs.com), and the [`Snap Store`](https://snapcraft.io/), a.k.a. [`snapd`](https://snapcraft.io).
+update is a small script thet updates apps from [`Apt`](https://en.wikipedia.org/wiki/APT_(software)),  [`Pi-Apps`](https://github.com/Botspot/pi-apps),     [`Flatpak`](https://www.flatpak.org/), [`Homebrew`](https://brew.sh), [`NPM`](https://npmjs.com), and the [`Snap Store`](https://snapcraft.io/), a.k.a. [`snapd`](https://snapcraft.io).
 
 
 
@@ -62,9 +62,9 @@ You can use `update` like this:
 update - Updates apps installed with Apt.
 update all - Updates apps on all supported systems.
 update pi-apps - Updates apps installed with pi-apps.
-update npm - Updates all npm apps.
+update npm - Updates all npm packages.
 update snaps - Updates apps installed with the snap store and snapd.
-update flatpak - Update Flatpak build instances.
+update flatpak - Updates Flatpak build instances.
 update homebrew - Updates apps installed with Homebrew.
 update self-update - Updates the update script
 update help - Displays a help.
@@ -73,9 +73,9 @@ update help - Displays a help.
 # What if I don't have some of these package managers and/or app stores?
 Well, that's fine. 
 
-- If you have a Debian/Ubuntu based distro, just use the `update` command alone.
+- If you have a Debian/Ubuntu based distro (apt), just use the `update` command alone.
 
-<hr>
+##
 
 ### To Install any of the other package managers and/or app stores:
 
@@ -86,12 +86,12 @@ Well, that's fine.
   ```
   wget -qO- https://raw.githubusercontent.com/Botspot/pi-apps/master/install | bash
   ```
-  Note: Pi-Apps is intended for use on the Raspberry Pi (Which has an ARM processor), running Raspberry Pi OS, Debian (Before Bullseye) or TwisterOS. 
-  Most to all of the apps won't work on x86 or x64 Intel or AMD processors. 
+  Note: Pi-Apps is intended for use on the Raspberry Pi, (Which has an ARM processor), running Raspberry Pi OS, Debian, or TwisterOS. 
+  Most to all of the apps won't work on non-arm processors.
 
   ### snapd
   
-  Install snapd like this:
+  Install snapd like this on Debian based distros:
 
   ```
   sudo apt install snapd
@@ -101,14 +101,30 @@ Well, that's fine.
 
 
   ### Flatpak
-  Install Flatpak like this:
+  Install Flatpak like this on Debian based distros:
   ```
   sudo apt install flatpak
   ```
 
-<hr>
+  ### Homebrew
+  
+  Install Homebrew like this:
+  
+  ```
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  ```
+  
+  ### Install NPM
+  
+  Install NPM like this on Debian based distros:
+  
+  ```
+  sudo apt install npm
+  ```
+  Note: NPM will usually only be useful for developers and software builders, so it may not be a good idea to use NPM unless you understand what you're doing.
 
-Note: I'm still working on this part of the readme, and I plan to add instructions for installing all package managers/app stores that you can use with update.
+##
+
 ## Todo
 
 - [x] Make a Releases tesing system, so when I release an update GitHub Actions tests installation.
