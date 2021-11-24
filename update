@@ -96,8 +96,4 @@ else
     sudo apt -y autoremove
 fi
 
-if [ "$2" = "easter-egg" ]; then
-        printf "${LIPURPLE}${BOLD}\nThis update script has super cow powers!\n${NC}"
-fi
-
 printf "${GREEN}\nDone!\n${NC}"
