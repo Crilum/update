@@ -1,6 +1,6 @@
 ![logo](https://github.com/Crilum/update/blob/main/Imgs/update_simple-100x100.png)
 # update
-update is a small script thet updates apps from [`Apt`](https://en.wikipedia.org/wiki/APT_(software)),  [`Pi-Apps`](https://github.com/Botspot/pi-apps),     [`Flatpak`](https://www.flatpak.org/), [`Homebrew`](https://brew.sh), [`NPM`](https://npmjs.com), and the [`Snap Store`](https://snapcraft.io/), a.k.a. [`snapd`](https://snapcraft.io).
+update is a small script that updates apps from [`Apt`](https://en.wikipedia.org/wiki/APT_(software)),  [`Pi-Apps`](https://github.com/Botspot/pi-apps),     [`Flatpak`](https://www.flatpak.org/), [`Homebrew`](https://brew.sh), [`NPM`](https://npmjs.com), and the [`Snap Store`](https://snapcraft.io/), a.k.a. [`snapd`](https://snapcraft.io).
 
 
 
@@ -77,7 +77,6 @@ curl "https://raw.githubusercontent.com/Crilum/update/main/install" | sudo bash
      ```
 
 </details>
- 
 
 # Uninstall
 Just remove the script:
