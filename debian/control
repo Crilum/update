@@ -1,0 +1,11 @@
+Maintainer: Crilum
+Summary: Updates apps/packages/dependencies from apt, pi-apps, flatpak, snapd, homebrew, and npm
+Name: update 
+Description: Small script to update apps from package managers
+License: gpl-3.0
+Architecture: all
+Provides: update
+Priority: optional
+Depends: bash
+Section: utils
+Package: update
