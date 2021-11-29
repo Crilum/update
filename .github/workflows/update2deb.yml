@@ -66,6 +66,6 @@ jobs:
           dpkg-deb --build update
 
       - uses: actions/upload-artifact@v2
-      with:
-        name: update_latest_all.deb
-        path: update.deb
+        with:
+          name: update_latest_all.deb
+          path: update.deb
