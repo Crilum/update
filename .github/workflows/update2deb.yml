@@ -57,6 +57,7 @@ jobs:
           echo "#!/bin/bash
           chmod +x /usr/bin/update
           exit 0" > postinst
+          chmod 775 postinst
           cd ../
 
       # Runs a set of commands using the runners shell
