@@ -14,7 +14,7 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  download_and_build:
+  create-update-deb:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -64,3 +64,8 @@ jobs:
       - name: Run dpkg-deb --build
         run: |
           dpkg-deb --build update
+
+      - uses: actions/upload-artifact@v2
+      with:
+        name: update_latest_all.deb
+        path: update.deb
