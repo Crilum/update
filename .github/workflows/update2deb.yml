@@ -38,7 +38,7 @@ jobs:
           wget -O postinst https://github.com/Crilum/update/raw/main/debian/postinst
           chmod 775 postinst
           cd ../
-          cd ../
+        
 
       # Runs a set of commands using the runners shell
       - name: Run dpkg-deb --build
