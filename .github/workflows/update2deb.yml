@@ -32,14 +32,6 @@ jobs:
           mkdir updatedeb && cd updatedeb
           mkdir -p usr/bin/
           mv ../update usr/bin/update
-          rm CODE_OF_CONDUCT.md
-          rm install
-          rm install-macos
-          rm README.md
-          rm LICENSE
-          rm -rf debs
-          rm -rf Imgs
-          rm -rf .github
           mkdir DEBIAN
           cd DEBIAN
           echo "Maintainer: Crilum
