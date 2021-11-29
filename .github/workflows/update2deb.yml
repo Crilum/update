@@ -17,7 +17,10 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      
+  
+      - name: save working directory in variable 'DIR'
+        run: echo "DIR=$(pwd)" >> $GITHUB_ENV
+
       - name: Clone repo
         run: git clone https://github.com/Crilum/update
 
@@ -26,8 +29,9 @@ jobs:
         run: |
           LATEST=`curl -s https://api.github.com/repos/Crilum/update/releases/latest | grep -oP '"tag_name": "\K(.*)(?=")' | tr -d 'v'`
           cd update
+          mkdir updatedeb && cd updatedeb
           mkdir -p usr/bin/
-          mv update usr/bin/update
+          mv ../update usr/bin/update
           rm CODE_OF_CONDUCT.md
           rm install
           rm install-macos
@@ -56,14 +60,19 @@ jobs:
           chmod +x /usr/bin/update
           exit 0" > postinst
           chmod 775 postinst
-          cd ../
+          cd ..
+          cd ..
 
       # Runs a set of commands using the runners shell
       - name: Run dpkg-deb --build
         run: |
-          dpkg-deb --build update
-
-      - uses: actions/upload-artifact@v2
+          dpkg-deb --build updatedeb/ update_${LATEST}_all.deb
+          echo "DEB=$(basename update*.deb)" >> $GITHUB_ENV 
+          
+      - name: Upload to release
+        uses: docker://gacts/upload-to-release:latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          name: update_latest_all.deb
-          path: update.deb
+          file: '${{ env.DIR }}/update/${{ env.DEB }}'
+          type: 'application/x-debian-package'
