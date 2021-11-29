@@ -23,8 +23,6 @@ jobs:
 
       - name: Clone repo
         run: git clone https://github.com/Crilum/update
-#wget https://github.com/Crilum/update/raw/main/debian/control
-#wget https://github.com/Crilum/update/raw/main/debian/postinst
       # Runs a single command using the runners shell
       - name: Prepare for building
         run: |
@@ -35,24 +33,9 @@ jobs:
           mv ../update usr/bin/update
           mkdir DEBIAN
           cd DEBIAN
-          echo "Maintainer: Crilum
-          Summary: Updates apps/packages/dependencies from apt, pi-apps, flatpak, snapd, homebrew, and npm
-          Name: update 
-          Description: Small script to update apps from package managers
-          Version: 1.1.0
-          License: gpl-3.0
-          Architecture: all
-          Provides: update
-          Priority: optional
-          Depends: bash
-          Section:
-          Recommends: 
-          Conflicts: 
-          Package: update" > control
+          wget -O control https://github.com/Crilum/update/raw/main/debian/control
           echo "Version: ${LATEST}" >> control
-          echo "#!/bin/bash
-          chmod +x /usr/bin/update
-          exit 0" > postinst
+          wget -O postinst https://github.com/Crilum/update/raw/main/debian/postinst
           chmod 775 postinst
           cd ..
           cd ..
