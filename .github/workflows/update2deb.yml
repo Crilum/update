@@ -44,7 +44,7 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Run dpkg-deb --build
         run: |
-          dpkg-deb --build updatedeb/ update_${LATEST}_all.deb
+          dpkg-deb --build updatedeb update_${LATEST}_all.deb
           echo "DEB=$(basename update*.deb)" >> $GITHUB_ENV 
           
       - name: Upload to release
