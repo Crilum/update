@@ -26,6 +26,7 @@ jobs:
       # Runs a single command using the runners shell
       - name: Prepare for building
         run: |
+          DEBIAN_FRONTEND=noninteractive sudo apt-get install dpkg-dev -y
           LATEST=`curl -s https://api.github.com/repos/Crilum/update/releases/latest | grep -oP '"tag_name": "\K(.*)(?=")' | tr -d 'v'`
           cd update
           mkdir updatedeb && cd updatedeb
