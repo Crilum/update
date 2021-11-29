@@ -1,18 +1,52 @@
 ![logo](https://github.com/Crilum/update/blob/main/Imgs/update_simple-100x100.png)
 # update
-update is a small script that updates apps from [`Apt`](https://en.wikipedia.org/wiki/APT_(software)),  [`Pi-Apps`](https://github.com/Botspot/pi-apps),     [`Flatpak`](https://www.flatpak.org/), [`Homebrew`](https://brew.sh), [`NPM`](https://npmjs.com), and the [`Snap Store`](https://snapcraft.io/), a.k.a. [`snapd`](https://snapcraft.io).
+update is a small script that updates apps from [`Apt`](https://en.wikipedia.org/wiki/APT_(software)),  [`Pi-Apps`](https://github.com/Botspot/pi-apps),     [`Flatpak`](https://www.flatpak.org/), [`Homebrew`](https://brew.sh), [`NPM`](https://npmjs.com), and the [`Snap Store`](https://snapcraft.io/) or [`snapd`](https://snapcraft.io).
 
 
 
 
 # Install
-```
-curl "https://raw.githubusercontent.com/Crilum/update/main/install" | sudo bash
-```
 
+### There are multiple ways to install update. Here are a few of them:
 
+- If you like fast and easy one-liners:
+  - Debian/Ubuntu based
+  ```
+  curl "https://raw.githubusercontent.com/Crilum/update/main/install" | sudo bash
+  ```
+  - MacOS
+  ```
+  curl "https://raw.githubusercontent.com/Crilum/update/main/install-macos" | sudo bash
+  ```
+  
+<details>
+ <summary><b>If you like installing with apt</b> | click to expand</summary>
+  
+ - Stable
+  
+    1. Download the deb:
+       ```
+       wget https://github.com/Crilum/update/raw/main/debs/update_v1.1.0_all.deb
+       ``` 
+       
+    2. Install it:
+       ```
+       sudo apt install update_v1.1.0_all.deb
+       ```
+  - Development
+     1. Download the deb from [here](https://github.com/Crilum/update/actions/runs/1516765433).
+
+     2. Unzip it:
+        ```
+        unzip $HOME/Downloads/update_latest_all.zip
+        ```
+     3. Install it:
+        ```
+        sudo apt install $HOME/Downloads/update.zip
+        ```
+ </details>
  <details> 
- <summary><b>If you want to install manually</b> | click to expand</summary>
+ <summary><b>If you like installing manually</b> | click to expand</summary>
 
 <h3>There are two different ways to download the script, the first one is easier, but you can use the second one if you want.</h3>
 
