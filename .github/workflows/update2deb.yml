@@ -2,6 +2,9 @@ name: update2deb
 
 # Controls when the workflow will run
 on:
+  release:
+    types:
+      - created
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -17,6 +20,10 @@ jobs:
       
       - name: Clone repo
         run: git clone https://github.com/Crilum/update
+
+      - name: Save version in LATEST variable
+        run: |
+          echo "LATEST=`curl -s https://api.github.com/repos/Crilum/update/releases/latest | grep -oP '"tag_name": "\K(.*)(?=")' | tr -d 'v'`" >> $GITHUB_ENV
 
       # Runs a single command using the runners shell
       - name: Prepare for building
@@ -38,7 +45,7 @@ jobs:
           Summary: Updates apps/packages/dependencies from apt, pi-apps, flatpak, snapd, homebrew, and npm
           Name: update 
           Description: Small script to update apps from package managers
-          Version: 1.1.0
+          Version: ${LATEST}
           License: gpl-3.0
           Architecture: all
           Provides: update
