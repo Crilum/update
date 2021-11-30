@@ -52,9 +52,14 @@ REVVID='\e[7m'
 #Code
 printf "\n${WHITE}Installing dependencies with apt...${NC}\n\n"
 sudo apt install -y curl wget bash
-cd /usr/local/bin
+rm -f update*.deb
 printf "\n${WHITE}Downloading ${CYAN}${BOLD}update${NC}${WHITE}...${NC}\n\n"
-sudo wget -O update "https://raw.githubusercontent.com/Crilum/update/main/update"
-sudo chmod +x update
-
+LATEST=`curl -s https://api.github.com/repos/Crilum/update/releases/latest | grep -oP '"tag_name": "\K(.*)(?=")'`
+curl -s https://api.github.com/repos/Crilum/update/releases/latest \
+  | grep browser_download_url \
+  | grep 'all.deb"' \
+  | cut -d '"' -f 4 \
+  | xargs -n 1 curl -L -o update_${LATEST}_all.deb
+sudo apt install -yf ./update_${LATEST}_all.deb
+rm update_${LATEST}_all.deb
 printf "${GREEN}All finished installing!\n${WHITE}Try \'${CYAN}${BOLD}update ${YELLOW}help${WHITE}\' to learn how to use ${CYAN}${BOLD}update${WHITE}!${NC}\n"
