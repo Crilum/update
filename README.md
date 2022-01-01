@@ -83,7 +83,7 @@ curl "https://raw.githubusercontent.com/Crilum/update/main/install" | sudo bash
 Just remove the script:
 
 ```
-sudo rm /usr/local/bin/update
+sudo rm /usr/bin/update
 ```
 
 and you're done!
