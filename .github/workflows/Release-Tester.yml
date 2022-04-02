@@ -21,13 +21,14 @@ jobs:
       - name: "Install Update"
         run: |
            echo "Running install script..."
-           curl "https://raw.githubusercontent.com/Crilum/update-app-script/main/install" | sudo bash
+           curl "https://raw.githubusercontent.com/Crilum/update/main/install" | sudo bash
            echo "Here is where Update is:"
            which update
       - name: "Test Update"
         run: |
            echo "Running update..."
            update help
+           update -u
            update -a
   Release-Test-MacOS:
     # The type of runner that the job will run on
@@ -47,6 +48,7 @@ jobs:
         run: |
            echo "Running update..."
            update help
+           update -u
            update -H
   #Release-Test-RPi:
   #  # The type of runner that the job will run on
