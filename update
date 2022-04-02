@@ -342,19 +342,22 @@ if [ "$(whoami)" == "root" ]; then
     error "Sorry, you can't run ${CYAN}${BOLD}update${NC}${RED}${BOLD} as root.. Please try again as a normal user."
 fi
 
-printf "${CYAN}${BOLD}\nWelcome to Crilum\'s Update Script!\n${NC}"
-upd_upd_script on-start
+case $1 in
+    version | -v | --version) ;; 
+    *) upd_upd_script on-start ;;
+esac
 
 case $1 in
 help | --help | -h) help ;;
-all | -A | --all) upd_all ;;
+all | -A | --all) printf "${CYAN}${BOLD}\nWelcome to Crilum\'s Update Script!\n${NC}"; upd_all ;;
 self-update | -u | --self-update) upd_upd_script ;;
-snaps | -s | --snaps) upd_snaps ;;
-homebrew | -h | --homebrew) upd_homebrew ;;
-pi-apps | -p | --pi-apps) upd_pi_apps ;;
-flatpak | -f | --flatpak) upd_flatpak ;;
-npm | -n | --npm) upd_npm ;;
-pacman | -c | --pacman) upd_pacman ;;
-apt | -a | --apt) upd_apt ;;
+snaps | -s | --snaps) printf "${CYAN}${BOLD}\nWelcome to Crilum\'s Update Script!\n${NC}"; upd_snaps ;;
+homebrew | -h | --homebrew) printf "${CYAN}${BOLD}\nWelcome to Crilum\'s Update Script!\n${NC}"; upd_homebrew ;;
+pi-apps | -p | --pi-apps) printf "${CYAN}${BOLD}\nWelcome to Crilum\'s Update Script!\n${NC}"; upd_pi_apps ;;
+flatpak | -f | --flatpak) printf "${CYAN}${BOLD}\nWelcome to Crilum\'s Update Script!\n${NC}"; upd_flatpak ;;
+npm | -n | --npm) printf "${CYAN}${BOLD}\nWelcome to Crilum\'s Update Script!\n${NC}"; upd_npm ;;
+pacman | -c | --pacman) printf "${CYAN}${BOLD}\nWelcome to Crilum\'s Update Script!\n${NC}"; upd_pacman ;;
+apt | -a | --apt) printf "${CYAN}${BOLD}\nWelcome to Crilum\'s Update Script!\n${NC}"; upd_apt ;;
+version | -v | --version) echo -e "${LICYAN}${version}" ;;
 *) error "Either you didn't specify a option/argument, or you didn't specify a valid one!" ;;
 esac
