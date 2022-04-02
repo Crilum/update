@@ -60,7 +60,7 @@ curl -s https://api.github.com/repos/Crilum/update/releases/latest \
   | grep browser_download_url \
   | grep 'all.deb"' \
   | cut -d '"' -f 4 \
-  | xargs -n 1 curl -L -o update_${LATEST}_all.deb
+  | xargs -n 1 curl -L -s -o update_${LATEST}_all.deb
 sudo apt install -yf ./update_${LATEST}_all.deb
 rm update_${LATEST}_all.deb
 printf "${GREEN}All finished installing!\n${WHITE}Try \'${CYAN}${BOLD}update ${YELLOW}help${WHITE}\' to learn how to use ${CYAN}${BOLD}update${WHITE}!${NC}\n"
