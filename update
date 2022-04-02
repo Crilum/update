@@ -299,16 +299,16 @@ ${WHITE}Usage: ${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}OPTIONS${NC}${WHITE}
 
 These are the available options/arguments for ${CYAN}${BOLD}update${NC}${WHITE}:
 
-${CYAN}${BOLD}update${YELLOW}${BOLD}apt · -a · --apt${NC}  				${WHITE}Updates apps with Apt
-${CYAN}${BOLD}update ${YELLOW}${BOLD}all · -A · --all${NC}      		${WHITE}Updates apps on all installed package managers and/or app stores that are supported ${NC}- ${LIRED}Note: This option does not update NPM packages because this can cause some trouble.
-${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}pi-apps · -p · --pi-apps${NC}      	${WHITE}Updates Pi-Apps, and apps installed with Pi-Apps
-${CYAN}${BOLD}update ${YELLOW}${BOLD}npm · -n · --npm${NC}       		${WHITE}Updates all npm packages
-${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}snaps · -s · --snaps${NC}             ${WHITE}Updates snaps with snapd
-${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}flatpak · -f · --flatpak${NC}         ${WHITE}Updates flatpak build instances
-${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}homebrew · -H · --homebrew${NC}       ${WHITE}Updates apps installed with Homebrew
-${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}pacman · -c · --pacman ${NC}          ${WHITE}Updates apps installed with pacman
-${CYAN}${BOLD}update ${YELLOW}${BOLD}self-update · -u · --self-update${NC} ${WHITE}Updates the ${CYAN}${BOLD}update ${WHITE}script
-${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}help · -h · --help${NC}       	${WHITE}Displays this help
+${CYAN}${BOLD}update${YELLOW}${BOLD} apt · -a · --apt [packages]${NC}         ${WHITE}Updates apps with Apt
+${CYAN}${BOLD}update ${YELLOW}${BOLD}all · -A · --all${NC}      		   ${WHITE}Updates apps on all installed package managers and/or app stores that are supported ${NC}- ${LIRED}Note: This option does not update NPM packages because this can cause some trouble.
+${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}pi-apps · -p · --pi-apps${NC}            ${WHITE}Updates Pi-Apps, and apps installed with Pi-Apps
+${CYAN}${BOLD}update ${YELLOW}${BOLD}npm · -n · --npm [packages]${NC}         ${WHITE}Updates all npm packages
+${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}snaps · -s · --snaps [snaps]${NC}        ${WHITE}Updates snaps with snapd
+${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}flatpak · -f · --flatpak [packages]${NC} ${WHITE}Updates flatpak build instances
+${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}homebrew · -H · --homebrew${NC}          ${WHITE}Updates apps installed with Homebrew
+${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}pacman · -c · --pacman [packages]   ${NC}${WHITE}Updates apps installed with pacman
+${CYAN}${BOLD}update ${YELLOW}${BOLD}self-update · -u · --self-update${NC}    ${WHITE}Updates the ${CYAN}${BOLD}update ${WHITE}script
+${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}help · -h · --help${NC}       	   ${WHITE}Displays this help
 
 ${LIRED}Note: This script is not meant to be used as root. Please don't use sudo.${NC}
 
@@ -320,16 +320,16 @@ ${WHITE}Usage: ${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}OPTIONS${NC}${WHITE}
 
 These are the available options/arguments for ${CYAN}${BOLD}update${NC}${WHITE}:
 
-${CYAN}${BOLD}update${YELLOW}${BOLD} apt · -a · --apt${NC}                 ${WHITE}Updates apps with Apt
-${CYAN}${BOLD}update ${YELLOW}${BOLD}all · -A · --all${NC}      		${WHITE}Updates apps on all installed package managers and/or app stores that are supported ${NC}- ${LIRED}Note: This option does not update NPM packages because this can cause some trouble.
-${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}pi-apps · -p · --pi-apps${NC}      	${WHITE}Updates Pi-Apps, and apps installed with Pi-Apps
-${CYAN}${BOLD}update ${YELLOW}${BOLD}npm · -n · --npm${NC}       		${WHITE}Updates all npm packages
-${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}snaps · -s · --snaps${NC}             ${WHITE}Updates snaps with snapd
-${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}flatpak · -f · --flatpak${NC}         ${WHITE}Updates flatpak build instances
-${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}homebrew · -H · --homebrew${NC}       ${WHITE}Updates apps installed with Homebrew
-${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}pacman · -c · --pacman ${NC}          ${WHITE}Updates apps installed with pacman
-${CYAN}${BOLD}update ${YELLOW}${BOLD}self-update · -u · --self-update${NC} ${WHITE}Updates the ${CYAN}${BOLD}update ${WHITE}script
-${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}help · -h · --help${NC}       	${WHITE}Displays this help
+${CYAN}${BOLD}update${YELLOW}${BOLD} apt · -a · --apt [packages]${NC}         ${WHITE}Updates apps with Apt
+${CYAN}${BOLD}update ${YELLOW}${BOLD}all · -A · --all${NC}      		   ${WHITE}Updates apps on all installed package managers and/or app stores that are supported ${NC}- ${LIRED}Note: This option does not update NPM packages because this can cause some trouble.
+${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}pi-apps · -p · --pi-apps${NC}            ${WHITE}Updates Pi-Apps, and apps installed with Pi-Apps
+${CYAN}${BOLD}update ${YELLOW}${BOLD}npm · -n · --npm${NC}       		   ${WHITE}Updates all npm packages
+${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}snaps · -s · --snaps [snaps]${NC}        ${WHITE}Updates snaps with snapd
+${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}flatpak · -f · --flatpak [packages] ${NC}${WHITE}Updates flatpak build instances
+${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}homebrew · -H · --homebrew${NC}          ${WHITE}Updates apps installed with Homebrew
+${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}pacman · -c · --pacman [packages]   ${NC}${WHITE}Updates apps installed with pacman
+${CYAN}${BOLD}update ${YELLOW}${BOLD}self-update · -u · --self-update${NC}    ${WHITE}Updates the ${CYAN}${BOLD}update ${WHITE}script
+${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}help · -h · --help${NC}       	   ${WHITE}Displays this help
 
 ${LIRED}Note: This script is not meant to be used as root. Please don't use sudo.${NC}
 "
