@@ -165,3 +165,4 @@ Well, that's fine.
 - [ ] Create `Contributing.md`.
 - [ ] Create pull request templates.
 - [ ] Create a editable configuration for `all` argument
+- [ ] Create a more reliable way to check for updates that doesn't depend on a variable in the script, or modify `update2deb` to edit the script and set the right version.
