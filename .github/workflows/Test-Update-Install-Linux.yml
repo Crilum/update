@@ -22,4 +22,4 @@ jobs:
     - name: Test Update
       run: |
          update help
-         update
+         update -a
