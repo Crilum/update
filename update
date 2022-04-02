@@ -235,7 +235,13 @@ upd_apt() {
 }
 
 function upd_homebrew() {
-    if ! command -v homebrew &>/dev/null; then
+    if [ "$(uname)" == "Darwin" ]; then
+        appchecker="whichapp"
+    else
+        appchecker="command -v"
+    fi
+
+    if ! $appchecker homebrew &>/dev/null; then
         status "I couldn't find Homebrew on your system, so I'm not using it."
         return
     fi
@@ -305,7 +311,7 @@ ${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}pi-apps · -p · --pi-apps${NC}      	
 ${CYAN}${BOLD}update ${YELLOW}${BOLD}npm · -n · --npm${NC}       		${WHITE}Updates all npm packages
 ${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}snaps · -s · --snaps${NC}             ${WHITE}Updates snaps with snapd
 ${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}flatpak · -f · --flatpak${NC}         ${WHITE}Updates flatpak build instances
-${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}homebrew · -h · --homebrew${NC}       ${WHITE}Updates apps installed with Homebrew
+${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}homebrew · -H · --homebrew${NC}       ${WHITE}Updates apps installed with Homebrew
 ${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}pacman · -c · --pacman ${NC}          ${WHITE}Updates apps installed with pacman
 ${CYAN}${BOLD}update ${YELLOW}${BOLD}self-update · -u · --self-update${NC} ${WHITE}Updates the ${CYAN}${BOLD}update ${WHITE}script
 ${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}help · -h · --help${NC}       	${WHITE}Displays this help
@@ -326,7 +332,7 @@ ${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}pi-apps · -p · --pi-apps${NC}      	
 ${CYAN}${BOLD}update ${YELLOW}${BOLD}npm · -n · --npm${NC}       		${WHITE}Updates all npm packages
 ${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}snaps · -s · --snaps${NC}             ${WHITE}Updates snaps with snapd
 ${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}flatpak · -f · --flatpak${NC}         ${WHITE}Updates flatpak build instances
-${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}homebrew · -h · --homebrew${NC}       ${WHITE}Updates apps installed with Homebrew
+${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}homebrew · -H · --homebrew${NC}       ${WHITE}Updates apps installed with Homebrew
 ${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}pacman · -c · --pacman ${NC}          ${WHITE}Updates apps installed with pacman
 ${CYAN}${BOLD}update ${YELLOW}${BOLD}self-update · -u · --self-update${NC} ${WHITE}Updates the ${CYAN}${BOLD}update ${WHITE}script
 ${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}help · -h · --help${NC}       	${WHITE}Displays this help
@@ -352,7 +358,7 @@ help | --help | -h) help ;;
 all | -A | --all) printf "${CYAN}${BOLD}\nWelcome to Crilum\'s Update Script!\n${NC}"; upd_all ;;
 self-update | -u | --self-update) upd_upd_script ;;
 snaps | -s | --snaps) printf "${CYAN}${BOLD}\nWelcome to Crilum\'s Update Script!\n${NC}"; upd_snaps ;;
-homebrew | -h | --homebrew) printf "${CYAN}${BOLD}\nWelcome to Crilum\'s Update Script!\n${NC}"; upd_homebrew ;;
+homebrew | -H | --homebrew) printf "${CYAN}${BOLD}\nWelcome to Crilum\'s Update Script!\n${NC}"; upd_homebrew ;;
 pi-apps | -p | --pi-apps) printf "${CYAN}${BOLD}\nWelcome to Crilum\'s Update Script!\n${NC}"; upd_pi_apps ;;
 flatpak | -f | --flatpak) printf "${CYAN}${BOLD}\nWelcome to Crilum\'s Update Script!\n${NC}"; upd_flatpak ;;
 npm | -n | --npm) printf "${CYAN}${BOLD}\nWelcome to Crilum\'s Update Script!\n${NC}"; upd_npm ;;
