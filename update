@@ -235,13 +235,7 @@ upd_apt() {
 }
 
 function upd_homebrew() {
-    if [ "$(uname)" == "Darwin" ]; then
-        appchecker="whichapp"
-    else
-        appchecker="command -v"
-    fi
-
-    if ! $appchecker brew &>/dev/null; then
+    if ! brew help &>/dev/null; then
         status "I couldn't find Homebrew on your system, so I'm not using it."
         return
     fi
