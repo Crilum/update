@@ -49,7 +49,8 @@ BOLD='\e[1m'
 BLINK='\e[5m'
 REVVID='\e[7m'
 
-#Code
+# Code
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 printf "\n${WHITE}Installing dependencies with Homebrew...${NC}\n\n"
 brew install curl wget chmod
 cd /usr/local/bin

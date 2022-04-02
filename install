@@ -49,12 +49,13 @@ BOLD='\e[1m'
 BLINK='\e[5m'
 REVVID='\e[7m'
 
-#Code
+# Code
+
 printf "\n${WHITE}Installing dependencies with apt...${NC}\n\n"
 sudo apt install -y curl wget bash
 rm -f update*.deb
 printf "\n${WHITE}Downloading ${CYAN}${BOLD}update${NC}${WHITE}...${NC}\n\n"
-LATEST=`curl -s https://api.github.com/repos/Crilum/update/releases/latest | grep -oP '"tag_name": "\K(.*)(?=")'`
+LATEST=$(curl -s https://api.github.com/repos/Crilum/update/releases/latest | grep -oP '"tag_name": "\K(.*)(?=")')
 curl -s https://api.github.com/repos/Crilum/update/releases/latest \
   | grep browser_download_url \
   | grep 'all.deb"' \
