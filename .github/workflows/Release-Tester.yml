@@ -28,7 +28,7 @@ jobs:
         run: |
            echo "Running update..."
            update help
-           update
+           update -a
   Release-Test-MacOS:
     # The type of runner that the job will run on
     runs-on: macos-latest
@@ -47,21 +47,21 @@ jobs:
         run: |
            echo "Running update..."
            update help
-           update homebrew
-  Release-Test-RPi:
-    # The type of runner that the job will run on
-    runs-on: [self-hosted, linux, ARM64]
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-      # Runs a set of commands using the runners shell
-      - name: "Run Linux test"
-        run: |
-           echo "Running install script..."
-           curl "https://raw.githubusercontent.com/Crilum/update-app-script/main/install" | sudo bash
-           echo "Here is where Update is:"
-           which update
-      - name: "Test Update"
-        run: |
-           echo "Running update..."
-           update help
-           update
+           update -H
+  #Release-Test-RPi:
+  #  # The type of runner that the job will run on
+  #  runs-on: [self-hosted, linux, ARM64]
+  #  # Steps represent a sequence of tasks that will be executed as part of the job
+  #  steps:
+  #    # Runs a set of commands using the runners shell
+  #    - name: "Run Linux test"
+  #      run: |
+  #         echo "Running install script..."
+  #         curl "https://raw.githubusercontent.com/Crilum/update-app-script/main/install" | sudo bash
+  #         echo "Here is where Update is:"
+  #         which update
+  #    - name: "Test Update"
+  #      run: |
+  #         echo "Running update..."
+  #         update help
+  #         update
