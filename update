@@ -241,7 +241,7 @@ function upd_homebrew() {
         appchecker="command -v"
     fi
 
-    if ! $appchecker homebrew &>/dev/null; then
+    if ! $appchecker brew &>/dev/null; then
         status "I couldn't find Homebrew on your system, so I'm not using it."
         return
     fi
