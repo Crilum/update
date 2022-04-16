@@ -100,7 +100,7 @@ function upd_pi_apps() {
             y | Y | yes | Yes | YES) wget -qO- https://raw.githubusercontent.com/Botspot/pi-apps/master/install | bash || error '\nI was not able to download and run the Pi-Apps install script. Make sure you have wget installed, and an internet connection.' ;;
             *) status 'Ok, I will not install Pi-Apps.' || exit 0 ;;
             esac
-        elif [[ ! $(cat /proc/cpuinfo | grep "Raspberry Pi") =~ "Raspberry Pi" ]] || [[ ! $(arch) =~ "arm" ]] || [[ ! $(arch) =~ "aarch" ]]; then
+        elif [[ ! $(cat /proc/cpuinfo | grep "Raspberry Pi") =~ "Raspberry Pi" ]] || [[ ! $(arch) =~ "arm" ]] && [[ ! $(arch) =~ "aarch" ]]; then
             warning "You are not using a Raspberry Pi, or an ARM computer (your architecture is $(arch)), so I won't install Pi-Apps."
         fi
     elif [ ! -e $HOME/pi-apps/updater ]; then
@@ -288,6 +288,7 @@ function upd_dnf() {
         status "I couldn't find \`dnf\`, so I'm assuming you're not running Fedora or a derivative of it. Not using \`dnf\`."
         return
     fi
+    internet_check
     sudo dnf upgrade $pkgs
 }
 function upd_all() {
