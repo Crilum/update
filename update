@@ -53,9 +53,9 @@ REVVID='\e[7m'
 
 pkgs="$*"
 if [[ "$pkgs" =~ "--no-grep-args" ]]; then
-pkgs="$(echo $pkgs | sed -e 's/--no-grep-args//g' -e 's/--all//g' -e 's/-a//g' -e 's/--apt//g' -e 's/-A//g' -e 's/all//g' -e 's/--npm//g' -e 's/-n//g' -e 's/snaps//g' -e 's/-s//g' -e 's/--snaps//g' -e 's/-f//g' -e 's/--flatpak//g' -e 's/-d//g' -e 's/--dnf//g')"
+    pkgs="$(echo $pkgs | sed -e 's/--no-grep-args//g' -e 's/--all//g' -e 's/-a//g' -e 's/--apt//g' -e 's/-A//g' -e 's/all//g' -e 's/--npm//g' -e 's/-n//g' -e 's/snaps//g' -e 's/-s//g' -e 's/--snaps//g' -e 's/-f//g' -e 's/--flatpak//g' -e 's/-d//g' -e 's/--dnf//g')"
 else
-pkgs="$(echo $pkgs | sed -e 's/--no-grep-args//g' -e 's/--all//g' -e 's/-a//g' -e 's/--apt//g' -e 's/apt//g' -e 's/-A//g' -e 's/all//g' -e 's/npm//g' -e 's/--npm//g' -e 's/-n//g' -e 's/snaps//g' -e 's/-s//g' -e 's/--snaps//g' -e 's/flatpak//g' -e 's/-f//g' -e 's/--flatpak//g' -e 's/dnf//g' -e 's/-d//g' -e 's/--dnf//g')"
+    pkgs="$(echo $pkgs | sed -e 's/--no-grep-args//g' -e 's/--all//g' -e 's/-a//g' -e 's/--apt//g' -e 's/apt//g' -e 's/-A//g' -e 's/all//g' -e 's/npm//g' -e 's/--npm//g' -e 's/-n//g' -e 's/snaps//g' -e 's/-s//g' -e 's/--snaps//g' -e 's/flatpak//g' -e 's/-f//g' -e 's/--flatpak//g' -e 's/dnf//g' -e 's/-d//g' -e 's/--dnf//g')"
 fi
 # Functions
 
@@ -175,7 +175,7 @@ function upd_upd_script() {
             updateAvailable="no"
             return
         else
-        status -g "No updates available. You're good to go!"
+            status -g "No updates available. You're good to go!"
         fi
 
     fi
@@ -322,6 +322,7 @@ ${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}pacman · -c · --pacman [packages]   
 ${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}dnf · -d · --dnf${NC}       	           ${WHITE}Updates apps installed with dnf
 ${CYAN}${BOLD}update ${YELLOW}${BOLD}self-update · -u · --self-update${NC}    ${WHITE}Updates the ${CYAN}${BOLD}update ${WHITE}script
 ${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}help · -h · --help${NC}       	   ${WHITE}Displays this help
+${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}version · -v · --version${NC}       	   ${WHITE}Prints version
 
 flags for ${LICYAN}update${WHITE}:
 
@@ -348,6 +349,7 @@ ${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}pacman · -c · --pacman [packages]   
 ${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}dnf · -d · --dnf${NC}       	           ${WHITE}Updates apps installed with dnf
 ${CYAN}${BOLD}update ${YELLOW}${BOLD}self-update · -u · --self-update${NC}    ${WHITE}Updates the ${CYAN}${BOLD}update ${WHITE}script
 ${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}help · -h · --help${NC}       	   ${WHITE}Displays this help
+${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}version · -v · --version${NC}       	   ${WHITE}Prints version
 
 flags for ${LICYAN}update${WHITE}:
 
@@ -365,22 +367,49 @@ if [ "$(whoami)" == "root" ]; then
 fi
 
 case $1 in
-    version | -v | --version) ;; 
-    *) upd_upd_script on-start ;;
+version | -v | --version) ;;
+*) upd_upd_script on-start ;;
 esac
 
 case $1 in
 help | --help | -h) help ;;
-all | -A | --all) printf "${CYAN}${BOLD}\nWelcome to Crilum\'s Update Script!\n${NC}"; upd_all ;;
+all | -A | --all)
+    printf "${CYAN}${BOLD}\nWelcome to Crilum\'s Update Script!\n${NC}"
+    upd_all
+    ;;
 self-update | -u | --self-update) upd_upd_script ;;
-snaps | -s | --snaps) printf "${CYAN}${BOLD}\nWelcome to Crilum\'s Update Script!\n${NC}"; upd_snaps ;;
-homebrew | -H | --homebrew) printf "${CYAN}${BOLD}\nWelcome to Crilum\'s Update Script!\n${NC}"; upd_homebrew ;;
-pi-apps | -p | --pi-apps) printf "${CYAN}${BOLD}\nWelcome to Crilum\'s Update Script!\n${NC}"; upd_pi_apps ;;
-flatpak | -f | --flatpak) printf "${CYAN}${BOLD}\nWelcome to Crilum\'s Update Script!\n${NC}"; upd_flatpak ;;
-npm | -n | --npm) printf "${CYAN}${BOLD}\nWelcome to Crilum\'s Update Script!\n${NC}"; upd_npm ;;
-pacman | -c | --pacman) printf "${CYAN}${BOLD}\nWelcome to Crilum\'s Update Script!\n${NC}"; upd_pacman ;;
-apt | -a | --apt) printf "${CYAN}${BOLD}\nWelcome to Crilum\'s Update Script!\n${NC}"; upd_apt ;;
-dnf | -d | --dnf) printf "${CYAN}${BOLD}\nWelcome to Crilum\'s Update Script!\n${NC}"; upd_dnf ;;
+snaps | -s | --snaps)
+    printf "${CYAN}${BOLD}\nWelcome to Crilum\'s Update Script!\n${NC}"
+    upd_snaps
+    ;;
+homebrew | -H | --homebrew)
+    printf "${CYAN}${BOLD}\nWelcome to Crilum\'s Update Script!\n${NC}"
+    upd_homebrew
+    ;;
+pi-apps | -p | --pi-apps)
+    printf "${CYAN}${BOLD}\nWelcome to Crilum\'s Update Script!\n${NC}"
+    upd_pi_apps
+    ;;
+flatpak | -f | --flatpak)
+    printf "${CYAN}${BOLD}\nWelcome to Crilum\'s Update Script!\n${NC}"
+    upd_flatpak
+    ;;
+npm | -n | --npm)
+    printf "${CYAN}${BOLD}\nWelcome to Crilum\'s Update Script!\n${NC}"
+    upd_npm
+    ;;
+pacman | -c | --pacman)
+    printf "${CYAN}${BOLD}\nWelcome to Crilum\'s Update Script!\n${NC}"
+    upd_pacman
+    ;;
+apt | -a | --apt)
+    printf "${CYAN}${BOLD}\nWelcome to Crilum\'s Update Script!\n${NC}"
+    upd_apt
+    ;;
+dnf | -d | --dnf)
+    printf "${CYAN}${BOLD}\nWelcome to Crilum\'s Update Script!\n${NC}"
+    upd_dnf
+    ;;
 version | -v | --version) echo -e "${LICYAN}${version}" ;;
 *) error "Either you didn't specify a option/argument, or you didn't specify a valid one!" ;;
 esac
