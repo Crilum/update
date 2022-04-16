@@ -52,10 +52,14 @@ REVVID='\e[7m'
 # Code
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 printf "\n${WHITE}Installing dependencies with Homebrew...${NC}\n\n"
-brew install curl wget chmod
-cd /usr/local/bin
+brew install curl chmod git
+LATEST=$(curl -s https://api.github.com/repos/Crilum/update/releases/latest | grep -oP '"tag_name": "\K(.*)(?=")')
 printf "\n${WHITE}Downloading ${CYAN}${BOLD}update${NC}${WHITE}...${NC}\n\n"
-sudo wget -qO update "https://raw.githubusercontent.com/Crilum/update/main/update"
-sudo chmod +x update
+cd /tmp/
+git clone https://github.com/Crilum/update
+cd /tmp/update
+git checkout $LATEST
+sudo cp update /usr/local/bin/
+sudo chmod +x /usr/local/bin/update
 
 printf "${GREEN}All finished installing!\n${WHITE}Try \'${CYAN}${BOLD}update ${YELLOW}help${WHITE}\' to learn how to use ${CYAN}${BOLD}update${WHITE}!${NC}\n"
