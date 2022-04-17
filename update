@@ -1,6 +1,6 @@
 #!/bin/bash
 
-version="v1.2.2"
+version="v1.3.0"
 
 #Color Variables
 
@@ -91,6 +91,12 @@ function internet_check() {
 }
 
 function upd_pi_apps() {
+    status 'Pi-Apps output:'
+
+    if [ "$(whoami)" = "root" ]; then
+        echo -e "\n\e[1;31mError: you can't update Pi-Apps as root! Please try again as normal user.\e[0m"
+        return 1
+    fi
 
     if [ ! -d $HOME/pi-apps ]; then
         if [[ $(cat /proc/cpuinfo | grep "Raspberry Pi") =~ "Raspberry Pi" ]]; then
@@ -107,7 +113,6 @@ function upd_pi_apps() {
         error 'I couldn'\''t find the pi-apps updater script.. Something is wrong!\n'
     fi
 
-    status 'Pi-Apps output:'
     $HOME/pi-apps/updater cli-yes
 }
 
@@ -119,7 +124,7 @@ function upd_snaps() {
     fi
     if [ "$1" == "all" ]; then
         status 'Checking for snap updates. Please Wait...\n'
-        sudo snap refresh || warning 'I failed to run '\''snap refresh'\''! snap has probably output an error above.'
+        $sudo snap refresh || warning 'I failed to run '\''snap refresh'\''! snap has probably output an error above.'
     else
         internet_check
         if [ "$pkgs" != "" ]; then
@@ -128,7 +133,7 @@ function upd_snaps() {
             errMsg="I wasn't able to refresh snap containers!"
         fi
         status 'Checking for snap updates. Please Wait...\n'
-        sudo snap refresh $pkgs || error "$errMsg"
+        $sudo snap refresh $pkgs || error "$errMsg"
     fi
 }
 
@@ -151,10 +156,10 @@ function upd_upd_script() {
             case $confInstallUpdate in
             y | Y | yes | YES | Yes | "")
                 if [ "$(uname)" == "Linux" ] && [[ "$(cat /etc/os-release | grep ID)" =~ "debian" ]]; then
-                    curl --silent "https://raw.githubusercontent.com/Crilum/update/main/install" | sudo bash || error 'I couldn'\''t update ${CYAN}${BOLD}update${RED}! Please make sure you have curl installed!'
+                    curl --silent "https://raw.githubusercontent.com/Crilum/update/main/install" | $sudo bash || error 'I couldn'\''t update ${CYAN}${BOLD}update${RED}! Please make sure you have curl installed!'
                     updateAvailable="no"
                 elif [ "$(uname)" == "Darwin" ]; then
-                    curl --silent "https://raw.githubusercontent.com/Crilum/update/main/install-macos" | sudo bash || error "Failed to update!"
+                    curl --silent "https://raw.githubusercontent.com/Crilum/update/main/install-macos" | $sudo bash || error "Failed to update!"
                     updateAvailable="no"
                 fi
                 ;;
@@ -207,10 +212,10 @@ function upd_pacman() {
     fi
     if [ "$1" == "all" ]; then
         status 'pacman output:\n'
-        sudo pacman -Syu || warning "I couldn't update pacman packages!"
+        $sudo pacman -Syu || warning "I couldn't update pacman packages!"
     else
         status 'pacman output:\n'
-        sudo pacman -Syu || error "I couldn't update pacman packages!"
+        $sudo pacman -Syu || error "I couldn't update pacman packages!"
     fi
 }
 
@@ -221,9 +226,9 @@ function upd_apt() {
     fi
     if [ "$1" == "all" ]; then
         status '\nApt output:\n'
-        sudo apt update
-        sudo apt -y upgrade
-        sudo apt -y autoremove
+        $sudo apt update
+        $sudo apt -y upgrade
+        $sudo apt -y autoremove
     else
         if [ "$pkgs" != "" ]; then
             errMsg="I wasn't able to upgrade: $pkgs!"
@@ -232,9 +237,9 @@ function upd_apt() {
         fi
         internet_check
         status '\nApt output:\n'
-        sudo apt update || error "Failed to run 'apt update'!"
-        sudo apt -y upgrade $pkgs || error "$errMsg"
-        sudo apt -y autoremove
+        $sudo apt update || error "Failed to run 'apt update'!"
+        $sudo apt -y upgrade $pkgs || error "$errMsg"
+        $sudo apt -y autoremove
     fi
 }
 
@@ -288,8 +293,12 @@ function upd_dnf() {
         status "I couldn't find \`dnf\`, so I'm assuming you're not running Fedora or a derivative of it. Not using \`dnf\`."
         return
     fi
-    internet_check
-    sudo dnf upgrade $pkgs
+    if [ "$1" == "all" ]; then
+        $sudo dnf upgrade $pkgs
+    else
+        internet_check
+        $sudo dnf upgrade $pkgs
+    fi
 }
 function upd_all() {
     internet_check
@@ -305,65 +314,43 @@ function upd_all() {
 }
 
 function help() {
+
+    echo -e "\n${LICYAN}update ${WHITE}version ${YELLOW}${version} ${WHITE}| created by ${LIBLUE}Crilum\n
+${WHITE}Usage: ${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}OPTIONS${NC}${WHITE}
+
+These are the main options/arguments for ${CYAN}${BOLD}update${NC}${WHITE}:
+
+${CYAN}${BOLD}update${YELLOW}${BOLD} apt · -a · --apt [packages]${NC}         ${WHITE}Updates apt packages
+${CYAN}${BOLD}update ${YELLOW}${BOLD}all · -A · --all${NC}      		   ${WHITE}Updates apps on all installed package managers and/or app stores that are supported ${NC}- ${LIRED}Note: This option does not update NPM packages because this can cause trouble.
+${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}pi-apps · -p · --pi-apps${NC}            ${WHITE}Updates Pi-Apps, and apps installed with Pi-Apps
+${CYAN}${BOLD}update ${YELLOW}${BOLD}npm · -n · --npm${NC}       		   ${WHITE}Updates all npm packages
+${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}snaps · -s · --snaps [snaps]${NC}        ${WHITE}Updates snaps with snapd
+${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}flatpak · -f · --flatpak [packages] ${NC}${WHITE}Updates flatpak apps
+${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}homebrew · -H · --homebrew${NC}          ${WHITE}Updates Homebrew apps
+${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}pacman · -c · --pacman [packages]   ${NC}${WHITE}Updates pacman apps
+${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}dnf · -d · --dnf${NC}       	           ${WHITE}Updates dnf packages
+${CYAN}${BOLD}update ${YELLOW}${BOLD}self-update · -u · --self-update${NC}    ${WHITE}Updates the ${CYAN}${BOLD}update ${WHITE}script
+${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}help · -h · --help${NC}       	   ${WHITE}Displays this help
+${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}version · -v · --version${NC}       	   ${WHITE}Prints version
+
+flags for ${LICYAN}update${WHITE}:
+
+      ${YELLOW}${BOLD}--no-grep-args${NC}                 	   ${WHITE}If this flag is specified, ${LICYAN}update${WHITE} won't remove arguments that are also packages from the update package list, i.e. 'apt'
+"
+    if [ "$(whoami)" == "root" ]; then
+        echo -e "${LIRED}Note: \`${LICYAN}update${LIRED}\` is not meant to be run with \`${WHITE}sudo${LIRED}\`. Although \`${LICYAN}update${LIRED}\` can be run with \`${WHITE}sudo${LIRED}\`, it is not recommended.\n"
+    fi
     if [ "$updateAvailable" == "yes" ]; then
-        echo -e "\n${LICYAN}update ${WHITE}version ${YELLOW}${version}\n
-${WHITE}Usage: ${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}OPTIONS${NC}${WHITE}
-
-These are the main options/arguments for ${CYAN}${BOLD}update${NC}${WHITE}:
-
-${CYAN}${BOLD}update${YELLOW}${BOLD} apt · -a · --apt [packages]${NC}         ${WHITE}Updates apps with Apt
-${CYAN}${BOLD}update ${YELLOW}${BOLD}all · -A · --all${NC}      		   ${WHITE}Updates apps on all installed package managers and/or app stores that are supported ${NC}- ${LIRED}Note: This option does not update NPM packages because this can cause trouble.
-${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}pi-apps · -p · --pi-apps${NC}            ${WHITE}Updates Pi-Apps, and apps installed with Pi-Apps
-${CYAN}${BOLD}update ${YELLOW}${BOLD}npm · -n · --npm${NC}       		   ${WHITE}Updates all npm packages
-${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}snaps · -s · --snaps [snaps]${NC}        ${WHITE}Updates snaps with snapd
-${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}flatpak · -f · --flatpak [packages] ${NC}${WHITE}Updates flatpak build instances
-${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}homebrew · -H · --homebrew${NC}          ${WHITE}Updates apps installed with Homebrew
-${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}pacman · -c · --pacman [packages]   ${NC}${WHITE}Updates apps installed with pacman
-${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}dnf · -d · --dnf${NC}       	           ${WHITE}Updates apps installed with dnf
-${CYAN}${BOLD}update ${YELLOW}${BOLD}self-update · -u · --self-update${NC}    ${WHITE}Updates the ${CYAN}${BOLD}update ${WHITE}script
-${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}help · -h · --help${NC}       	   ${WHITE}Displays this help
-${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}version · -v · --version${NC}       	   ${WHITE}Prints version
-
-flags for ${LICYAN}update${WHITE}:
-
-      ${YELLOW}${BOLD}--no-grep-args${NC}                 	   ${WHITE}If this flag is specified, ${LICYAN}update${WHITE} won't remove arguments that are also packages, i.e. 'apt'
-
-${LIRED}Note: This script is not meant to be used as root. Please don't use sudo.${NC}
-
-${LICYAN}There's an update available! ${WHITE}Run \`${LICYAN}update ${YELLOW}-u${WHITE}\` to install it. 
-"
-    elif [ "$updateAvailable" == "no" ] || [ "$updateAvailable" == "" ]; then
-        echo -e "\n${LICYAN}update ${WHITE}version ${YELLOW}${version}\n
-${WHITE}Usage: ${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}OPTIONS${NC}${WHITE}
-
-These are the main options/arguments for ${CYAN}${BOLD}update${NC}${WHITE}:
-
-${CYAN}${BOLD}update${YELLOW}${BOLD} apt · -a · --apt [packages]${NC}         ${WHITE}Updates apps with Apt
-${CYAN}${BOLD}update ${YELLOW}${BOLD}all · -A · --all${NC}      		   ${WHITE}Updates apps on all installed package managers and/or app stores that are supported ${NC}- ${LIRED}Note: This option does not update NPM packages because this can cause trouble.
-${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}pi-apps · -p · --pi-apps${NC}            ${WHITE}Updates Pi-Apps, and apps installed with Pi-Apps
-${CYAN}${BOLD}update ${YELLOW}${BOLD}npm · -n · --npm${NC}       		   ${WHITE}Updates all npm packages
-${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}snaps · -s · --snaps [snaps]${NC}        ${WHITE}Updates snaps with snapd
-${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}flatpak · -f · --flatpak [packages] ${NC}${WHITE}Updates flatpak build instances
-${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}homebrew · -H · --homebrew${NC}          ${WHITE}Updates apps installed with Homebrew
-${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}pacman · -c · --pacman [packages]   ${NC}${WHITE}Updates apps installed with pacman
-${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}dnf · -d · --dnf${NC}       	           ${WHITE}Updates apps installed with dnf
-${CYAN}${BOLD}update ${YELLOW}${BOLD}self-update · -u · --self-update${NC}    ${WHITE}Updates the ${CYAN}${BOLD}update ${WHITE}script
-${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}help · -h · --help${NC}       	   ${WHITE}Displays this help
-${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}version · -v · --version${NC}       	   ${WHITE}Prints version
-
-flags for ${LICYAN}update${WHITE}:
-
-      ${YELLOW}${BOLD}--no-grep-args${NC}                 	   ${WHITE}If this flag is specified, ${LICYAN}update${WHITE} won't remove arguments that are also packages, i.e. 'apt'
-
-${LIRED}Note: This script is not meant to be used as root. Please don't use sudo.${NC}
-"
+        echo -e "${LICYAN}There's an update available! ${WHITE}Run \`${LICYAN}update ${YELLOW}-u${WHITE}\` to install it.\n"
     fi
 }
 
 # Script
 
 if [ "$(whoami)" == "root" ]; then
-    error "Sorry, you can't run ${CYAN}${BOLD}update${NC}${RED}${BOLD} as root.. Please try again as a normal user."
+    sudo=""
+else
+    sudo="sudo"
 fi
 
 case $1 in
