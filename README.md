@@ -7,10 +7,14 @@ update is a small script that updates apps from [`Apt`](https://en.wikipedia.org
 
 
 # Install
+Debian/Ubuntu and derivatives:
 ```
 curl "https://raw.githubusercontent.com/Crilum/update/main/install" | sudo bash
 ```
-
+macOS:
+```
+curl "https://raw.githubusercontent.com/Crilum/update/main/install-macos" | sudo bash
+```
 
  <details> 
  <summary><b>If you want to install manually</b> | click to expand</summary>
