@@ -91,76 +91,30 @@ and you're done!
 
 # Usage
 You can use `update` like this:
+
+These are the main options/arguments for update:
 ```
-update - Updates apps installed with Apt.
-update all - Updates apps on all supported systems.
-update pi-apps - Updates apps installed with pi-apps.
-update npm - Updates all npm packages.
-update snaps - Updates apps installed with the snap store and snapd.
-update flatpak - Updates Flatpak build instances.
-update homebrew - Updates apps installed with Homebrew.
-update pacman - Updates apps installed with pacman.
-update self-update - Updates the update script
-update help - Displays a help.
+update apt · -a · --apt [packages]         Updates apt packages
+update all · -A · --all                    Updates apps on all installed package managers and/or app stores that are supported - Note: This option does not update NPM packages because this can cause trouble.
+update pi-apps · -p · --pi-apps            Updates Pi-Apps, and apps installed with Pi-Apps
+update npm · -n · --npm                    Updates all npm packages
+update snaps · -s · --snaps [snaps]        Updates snaps with snapd
+update flatpak · -f · --flatpak [packages] Updates flatpak apps
+update homebrew · -H · --homebrew          Updates Homebrew apps
+update pacman · -c · --pacman [packages]   Updates pacman apps
+update dnf · -d · --dnf                    Updates dnf packages
+update self-update · -u · --self-update    Updates the update script
+update help · -h · --help                  Displays this help
+update version · -v · --version            Prints version
+```
+Flags for update:
+```
+      --no-grep-args                       If this flag is specified, update won't remove arguments that are also packages from the update package list, i.e. 'apt'
 ```
 
-# What if I don't have some of these package managers and/or app stores?
-Well, that's fine. 
-
-- If you have a Debian/Ubuntu based distro (apt), just use the `update` command alone.
-
-##
-
-### To Install any of the other package managers and/or app stores:
-
-  ### Pi-Apps
-  
-  You can install Pi-Apps like this:
- 
-  ```
-  wget -qO- https://raw.githubusercontent.com/Botspot/pi-apps/master/install | bash
-  ```
-  Note: Pi-Apps is intended for use on the Raspberry Pi, (Which has an ARM processor), running Raspberry Pi OS, Debian, or TwisterOS. 
-  Most to all of the apps won't work on non-arm processors.
-
-  ### snapd
-  
-  Install snapd like this on Debian based distros:
-
-  ```
-  sudo apt install snapd
-  ```
-  
-  Note: The Snap Store in Ubuntu is just a GUI for `snapd`, so the update script will also update apps from there too. `snapd` is installed by default in Ubuntu.
-
-
-  ### Flatpak
-  Install Flatpak like this on Debian based distros:
-  ```
-  sudo apt install flatpak
-  ```
-
-  ### Homebrew
-  
-  Install Homebrew like this:
-  
-  ```
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  ```
-  
-  ### Install NPM
-  
-  Install NPM like this on Debian based distros:
-  
-  ```
-  sudo apt install npm
-  ```
-  Note: NPM will usually only be useful for developers and software builders, so it may not be a good idea to use NPM unless you understand what you're doing.
-
-##
 
 ## Todo
-
+- [ ] make a unified install script.
 - [x] Make a Releases tesing system, so when I release an update GitHub Actions tests installation.
 - [ ] Create `Contributing.md`.
 - [ ] Create pull request templates.
