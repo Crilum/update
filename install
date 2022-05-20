@@ -87,7 +87,7 @@ Linux)
     ;;
   "fedora")
     printf "\n${WHITE}Installing dependencies with dnf...${NC}\n\n"
-    sudo dnf install -y curl wget bash
+    sudo dnf install -y curl wget bash alien
     rm -f update*.rpm
     printf "\n${WHITE}Downloading ${CYAN}${BOLD}update${NC}${WHITE}...${NC}\n\n"
     LATEST=$(curl -s https://api.github.com/repos/Crilum/update/releases/latest | grep -oP '"tag_name": "\K(.*)(?=")')
@@ -96,7 +96,7 @@ Linux)
       grep 'noarch.rpm"' |
       cut -d '"' -f 4 |
       xargs -n 1 curl -L -s -o update.${LATEST}-2.noarch.rpm
-    $sudo dnf install -y ./update.${LATEST}-2.noarch.rpm
+    $sudo alien -i ./update.${LATEST}-2.noarch.rpm
     rm update.${LATEST}-2.noarch.rpm
     ;;
   *)
