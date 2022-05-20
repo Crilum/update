@@ -21,12 +21,13 @@ jobs:
       - name: save working directory in variable 'DIR'
         run: echo "DIR=$(pwd)" >> $GITHUB_ENV
 
-      #- name: Clone repo
-      #  run: git clone https://github.com/Crilum/update
+      - name: Clone repo
+        run: git clone https://github.com/Crilum/update
       # Runs a single command using the runners shell
       - name: Build DEB and RPM
         run: |
           LATEST=`curl -s https://api.github.com/repos/Crilum/update/releases/latest | grep -oP '"tag_name": "\K(.*)(?=")' | tr -d 'v'`
+          cd update
           mkdir updatedeb && cd updatedeb
           mkdir -p usr/bin/
           mv ../update usr/bin/update
