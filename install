@@ -62,15 +62,16 @@ fi
 
 case $(uname) in
 Linux)
-  if [[ "$(lsb_release -a || cat /etc/*-release || cat /etc/issue)" =~ [debianDebianubuntuUbuntuRaspbianraspbian] ]] || command -v apt-get &>/dev/null || command -v apt &>/dev/null; then
-    distro="debian/ubuntu/apt-based"
-  elif [[ "$(lsb_release -a || cat /etc/redhat-release || cat /etc/*-release || cat /etc/issue)" =~ ["fedora""Fedora""CentOS""centOS""Centos""centos""Red Hat""red hat"] ]]; then
-    distro="redhat/fedora/centos/dnf-based"
-  elif [[ "$(lsb_release -a || cat /etc/*-release || cat /etc/issue)" =~ [ArcharchManjaromanjaro] ]] || command -v pacman &>/dev/null; then
-    distro="arch/manjaro/pacman"
+  if [[ "$(cat /etc/*-release || cat /etc/issue || lsb_release -a)" =~ "debian" ]] || [[ "$(cat /etc/*-release || cat /etc/issue || lsb_release -a)" =~ "Debian" ]] || [[ "$(cat /etc/*-release || cat /etc/issue || lsb_release -a)" =~ "ubuntu" ]] || [[ "$(cat /etc/*-release || cat /etc/issue || lsb_release -a)" =~ "Ubuntu" ]] || [[ "$(cat /etc/*-release || cat /etc/issue || lsb_release -a)" =~ "raspbian" ]] || [[ "$(cat /etc/*-release || cat /etc/issue || lsb_release -a)" =~ "Raspbian" ]] || command -v apt-get &>/dev/null || command -v apt &>/dev/null; then
+    distro="debian"
+  elif [[ "$(cat /etc/*-release || cat /etc/redhat-release || cat /etc/issue || lsb_release -a)" =~ "fedora" ]] || [[ "$(cat /etc/*-release || cat /etc/redhat-release || cat /etc/issue || lsb_release -a)" =~ "Fedora" ]] || [[ "$(cat /etc/*-release || cat /etc/redhat-release || cat /etc/issue || lsb_release -a)" =~ "CentOS" ]] || [[ "$(cat /etc/*-release || cat /etc/redhat-release || cat /etc/issue || lsb_release -a)" =~ "centos" ]] || [[ "$(cat /etc/*-release || cat /etc/redhat-release || cat /etc/issue || lsb_release -a)" =~ "Red Hat" ]] || [[ "$(cat /etc/*-release || cat /etc/redhat-release || cat /etc/issue || lsb_release -a)" =~ "red hat" ]] || command -v dnf &>/dev/null; then
+    distro="fedora"
+  elif [[ "$(cat /etc/*-release || lsb_release -a || cat /etc/issue)" =~ "Arch" ]] || [[ "$(cat /etc/*-release || lsb_release -a || cat /etc/issue)" =~ "arch" ]] || [[ "$(cat /etc/*-release || lsb_release -a || cat /etc/issue)" =~ "Manjaro" ]] || [[ "$(cat /etc/*-release || lsb_release -a || cat /etc/issue)" =~ "manjaro" ]] || command -v pacman &>/dev/null; then
+    distro="arch"
   fi
-  case distro in
-  debian/ubuntu/apt-based)
+
+  case $distro in
+  "debian")
     printf "\n${WHITE}Installing dependencies with apt...${NC}\n\n"
     $sudo apt install -y curl wget bash
     rm -f update*.deb
@@ -84,7 +85,7 @@ Linux)
     $sudo apt install -yf ./update_${LATEST}_all.deb
     rm update_${LATEST}_all.deb
     ;;
-  redhat/fedora/centos/dnf-based)
+  "fedora")
     printf "\n${WHITE}Installing dependencies with dnf...${NC}\n\n"
     sudo dnf install -y curl wget bash
     rm -f update*.rpm
@@ -92,11 +93,11 @@ Linux)
     LATEST=$(curl -s https://api.github.com/repos/Crilum/update/releases/latest | grep -oP '"tag_name": "\K(.*)(?=")')
     curl -s https://api.github.com/repos/Crilum/update/releases/latest |
       grep browser_download_url |
-      grep 'all.rpm"' |
+      grep 'noarch.rpm"' |
       cut -d '"' -f 4 |
-      xargs -n 1 curl -L -s -o update_${LATEST}_all.rpm
-    $sudo dnf install -y ./update_${LATEST}_all.rpm
-    rm update_${LATEST}_all.rpm
+      xargs -n 1 curl -L -s -o update.${LATEST}-2.noarch.rpm
+    $sudo dnf install -y ./update.${LATEST}-2.noarch.rpm
+    rm update.${LATEST}-2.noarch.rpm
     ;;
   *)
     if ! command -v curl &>/dev/null || ! command -v chmod &>/dev/null || ! command -v wget &>/dev/null || ! command -v git &>/dev/null; then
