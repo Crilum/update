@@ -1,4 +1,4 @@
-![logo](https://github.com/Crilum/update/blob/main/Imgs/update_simple-100x100.png)
+![logo](https://github.com/Crilum/update/blob/main/images/update_simple-100x100.png)
 [![update2deb](https://github.com/Crilum/update/actions/workflows/update2deb.yml/badge.svg?branch=main)](https://github.com/Crilum/update/actions/workflows/update2deb.yml)
 # update
 update is a small script that updates apps from [`Apt`](https://en.wikipedia.org/wiki/APT_(software)),  [`Pi-Apps`](https://github.com/Botspot/pi-apps),     [`Flatpak`](https://www.flatpak.org/), [`Homebrew`](https://brew.sh), [`NPM`](https://npmjs.com), and the [`Snap Store`](https://snapcraft.io/), a.k.a. [`snapd`](https://snapcraft.io).
