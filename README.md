@@ -9,7 +9,7 @@ update is a small script that updates apps from [`Apt`](https://en.wikipedia.org
 # Install
 
 ```
-curl "https://raw.githubusercontent.com/Crilum/update/main/install" | sudo bash
+curl "https://raw.githubusercontent.com/Crilum/update/main/install" | bash
 ```
 
 This should work for most systems (Apt-based distros (not Alpine Linux, yet..), DNF-based distros, most other Linux distros, and MacOS). If it doesn't work on your system, [create an issue](https://github.com/Crilum/update/issues/new) (or even better, a PR), and I'll try to help. 
