@@ -57,7 +57,7 @@ else
 fi
 
 if [[ ! "$SHELL" =~ "bash" ]]; then
-  echo "${YELLOW}You aren't using bash... This install script (and ${LICYAN}update${YELLOW}) is written in bash, so you might have some problems.${NC}"
+  echo -e "${YELLOW}You aren't using bash... This install script (and ${LICYAN}update${YELLOW}) is written in bash, so you might have some problems.${NC}"
 fi
 
 case $(uname) in
@@ -100,7 +100,7 @@ Linux)
     ;;
   *)
     if ! command -v curl &>/dev/null || ! command -v chmod &>/dev/null || ! command -v wget &>/dev/null || ! command -v git &>/dev/null; then
-      echo "${LIRED}Error: Missing dependencies! Please install \`curl\`, \`wget\`, \`git\`, and of course, \`bash\` (If you got this far, you should already have it installed).${NC}"
+      echo -e "${LIRED}Error: Missing dependencies! Please install \`curl\`, \`wget\`, \`git\`, and of course, \`bash\` (If you got this far, you should already have it installed).${NC}"
       exit 1
     fi
     LATEST=$(curl -s https://api.github.com/repos/Crilum/update/releases/latest | grep -oP '"tag_name": "\K(.*)(?=")')

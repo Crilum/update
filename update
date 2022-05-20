@@ -111,6 +111,7 @@ function upd_pi_apps() {
             warning "I didn't find Pi-Apps, and you are not using a Raspberry Pi, or an ARM computer (your architecture is $(arch)), so I won't ask to install Pi-Apps."
             else
             error "I didn't find Pi-Apps, and you are not using a Raspberry Pi, or an ARM computer (your architecture is $(arch)), so I won't ask to install Pi-Apps."
+            fi
         fi
     elif [ ! -e $HOME/pi-apps/updater ]; then
         error 'I couldn'\''t find the pi-apps updater script.. Something is wrong!\n'
@@ -266,7 +267,7 @@ function upd_npm() {
     if [ "$1" == "all" ]; then
         warning 'Updating npm dependencies should only be done if you know what you'\''re doing. Do you want to continue? Timeout in 10 seconds... [y/N] '
         read -t 10 input
-        case input in
+        case $input in
         y | Y | Yes | yes | YES | "")
             printf "\n${WHITE}npm output:${NC}\n"
             npm update
@@ -276,7 +277,7 @@ function upd_npm() {
     else
         warning 'Updating npm dependencies should only be done if you know what you'\''re doing. Do you want to continue? [y/N] '
         read input
-        case input in
+        case $input in
         y | Y | Yes | yes | YES | "")
             printf "\n${WHITE}npm output:${NC}\n"
             npm update $pkgs
