@@ -7,14 +7,12 @@ update is a small script that updates apps from [`Apt`](https://en.wikipedia.org
 
 
 # Install
-Debian/Ubuntu and derivatives:
+
 ```
 curl "https://raw.githubusercontent.com/Crilum/update/main/install" | sudo bash
 ```
-macOS:
-```
-curl "https://raw.githubusercontent.com/Crilum/update/main/install-macos" | sudo bash
-```
+
+This should work for most systems (Apt-based distros (not Alpine Linux, yet..), DNF-based distros, most other Linux distros, and MacOS). If it doesn't work on your system, [create an issue](https://github.com/Crilum/update/issues/new) (or even better, a PR), and I'll try to help. 
 
  <details> 
  <summary><b>If you want to install manually</b> | click to expand</summary>
@@ -30,10 +28,11 @@ curl "https://raw.githubusercontent.com/Crilum/update/main/install-macos" | sudo
    sudo apt install wget
    ```  
  
-2. Download `update` with `wget`:
+2. Download the latest version of `update` with `wget`:
    
    ```
-   wget "https://raw.githubusercontent.com/Crilum/update/main/update"
+   version="$(curl -s https://api.github.com/repos/Crilum/update/releases/latest | grep -oP '"tag_name": "\K(.*)(?=")')"
+   wget "https://github.com/Crilum/update/raw/v${version}/update"
    ```  
  
 3. Move `update` to `/usr/local/bin/`:
@@ -51,16 +50,18 @@ curl "https://raw.githubusercontent.com/Crilum/update/main/install-macos" | sudo
  
 <h4> Method 2. Use `git clone` and copy the script to `/usr/local/bin/`:</h4>
      
-1. Clone the repository:
+1. Clone the latest release of the repository:
   
    ```
-   git clone https://github.com/Crilum/update/
+   version="$(curl -s https://api.github.com/repos/Crilum/update/releases/latest | grep -oP '"tag_name": "\K(.*)(?=")')"
+   git clone https://github.com/Crilum/update/ -b $version
    ```
   
 2. Or, if you have GitHub CLI:
   
    ```
-   gh repo clone Crilum/update/
+   version="$(curl -s https://api.github.com/repos/Crilum/update/releases/latest | grep -oP '"tag_name": "\K(.*)(?=")')"
+   gh repo clone Crilum/update -- -b $version
    ```
 
 3. Copy the Update Script to `/usr/local/bin/`:
@@ -78,7 +79,7 @@ curl "https://raw.githubusercontent.com/Crilum/update/main/install-macos" | sudo
 5. Remove the cloned repository (This is optional):
 
      ```
-     rm /path/to/update
+     rm -rf update/
      ```
 
 </details>
@@ -118,7 +119,7 @@ Flags for update:
 
 
 ## Todo
-- [ ] make a unified install script.
+- [X] make a unified install script.
 - [x] Make a Releases tesing system, so when I release an update GitHub Actions tests installation.
 - [ ] Create `Contributing.md`.
 - [ ] Create pull request templates.

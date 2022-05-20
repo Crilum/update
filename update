@@ -1,6 +1,6 @@
 #!/bin/bash
 
-version="v1.3.0"
+version="v1.3.1"
 
 #Color Variables
 
@@ -69,7 +69,7 @@ function error() {
 }
 
 function warning() {
-    printf "\nWarning: ${YELLOW}$1${NC} Continuing...\n"
+    printf "\nWarning: ${YELLOW}$1${NC}\n"
 }
 
 function status() {
@@ -106,8 +106,11 @@ function upd_pi_apps() {
             y | Y | yes | Yes | YES) wget -qO- https://raw.githubusercontent.com/Botspot/pi-apps/master/install | bash || error '\nI was not able to download and run the Pi-Apps install script. Make sure you have wget installed, and an internet connection.' ;;
             *) status 'Ok, I will not install Pi-Apps.' || exit 0 ;;
             esac
-        elif [[ ! $(cat /proc/cpuinfo | grep "Raspberry Pi") =~ "Raspberry Pi" ]] || [[ ! $(arch) =~ "arm" ]] && [[ ! $(arch) =~ "aarch" ]]; then
-            warning "You are not using a Raspberry Pi, or an ARM computer (your architecture is $(arch)), so I won't install Pi-Apps."
+        elif [[ ! $(cat /proc/cpuinfo | grep "Raspberry Pi") =~ "Raspberry Pi" ]] || [[ ! $(arch) =~ "arm" ]] && [[ ! $(arch) =~ "aarch" ]] && [[ ! "$(uname)" == "Darwin" ]]; then
+            if [ "$1" == "all" ]; then
+            warning "I didn't find Pi-Apps, and you are not using a Raspberry Pi, or an ARM computer (your architecture is $(arch)), so I won't ask to install Pi-Apps."
+            else
+            error "I didn't find Pi-Apps, and you are not using a Raspberry Pi, or an ARM computer (your architecture is $(arch)), so I won't ask to install Pi-Apps."
         fi
     elif [ ! -e $HOME/pi-apps/updater ]; then
         error 'I couldn'\''t find the pi-apps updater script.. Something is wrong!\n'
@@ -155,13 +158,8 @@ function upd_upd_script() {
             updateAvailable="yes"
             case $confInstallUpdate in
             y | Y | yes | YES | Yes | "")
-                if [ "$(uname)" == "Linux" ] && [[ "$(cat /etc/os-release | grep ID)" =~ "debian" ]]; then
-                    curl --silent "https://raw.githubusercontent.com/Crilum/update/main/install" | $sudo bash || error 'I couldn'\''t update ${CYAN}${BOLD}update${RED}! Please make sure you have curl installed!'
+                    curl --silent "https://raw.githubusercontent.com/Crilum/update/main/install" | bash || error 'I couldn'\''t update ${CYAN}${BOLD}update${RED}! Please make sure you have curl installed!'
                     updateAvailable="no"
-                elif [ "$(uname)" == "Darwin" ]; then
-                    curl --silent "https://raw.githubusercontent.com/Crilum/update/main/install-macos" | $sudo bash || error "Failed to update!"
-                    updateAvailable="no"
-                fi
                 ;;
             *)
                 status "Ok, I won't install the update."
@@ -290,7 +288,7 @@ function upd_npm() {
 
 function upd_dnf() {
     if ! command -v dnf &>/dev/null; then
-        status "I couldn't find \`dnf\`, so I'm assuming you're not running Fedora or a derivative of it. Not using \`dnf\`."
+        status "I couldn't find dnf, so I'm assuming you're not running Fedora or a derivative of it. Not using dnf."
         return
     fi
     if [ "$1" == "all" ]; then

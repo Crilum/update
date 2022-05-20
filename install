@@ -22,7 +22,6 @@ LIBLUE='\e[1;34m'
 LIPURPLE='\e[1;35m'
 LICYAN='\e[1;36m'
 
-
 #Background Color Variables
 
 BACKBLACK='\e[0;40m'
@@ -51,16 +50,95 @@ REVVID='\e[7m'
 
 # Code
 
-printf "\n${WHITE}Installing dependencies with apt...${NC}\n\n"
-sudo apt install -y curl wget bash
-rm -f update*.deb
-printf "\n${WHITE}Downloading ${CYAN}${BOLD}update${NC}${WHITE}...${NC}\n\n"
-LATEST=$(curl -s https://api.github.com/repos/Crilum/update/releases/latest | grep -oP '"tag_name": "\K(.*)(?=")')
-curl -s https://api.github.com/repos/Crilum/update/releases/latest \
-  | grep browser_download_url \
-  | grep 'all.deb"' \
-  | cut -d '"' -f 4 \
-  | xargs -n 1 curl -L -s -o update_${LATEST}_all.deb
-sudo apt install -yf ./update_${LATEST}_all.deb
-rm update_${LATEST}_all.deb
+if [ "$(whoami)" == "root" ]; then
+  sudo=""
+else
+  sudo="sudo"
+fi
+
+if [[ ! "$SHELL" =~ "bash" ]]; then
+  echo "${YELLOW}You aren't using bash... This install script (and ${LICYAN}update${YELLOW}) is written in bash, so you might have some problems.${NC}"
+fi
+
+case $(uname) in
+Linux)
+  if [[ "$(lsb_release -a || cat /etc/*-release || cat /etc/issue)" =~ [debianDebianubuntuUbuntuRaspbianraspbian] ]] || command -v apt-get &>/dev/null || command -v apt &>/dev/null; then
+    distro="debian/ubuntu/apt-based"
+  elif [[ "$(lsb_release -a || cat /etc/redhat-release || cat /etc/*-release || cat /etc/issue)" =~ ["fedora""Fedora""CentOS""centOS""Centos""centos""Red Hat""red hat"] ]]; then
+    distro="redhat/fedora/centos/dnf-based"
+  elif [[ "$(lsb_release -a || cat /etc/*-release || cat /etc/issue)" =~ [ArcharchManjaromanjaro] ]] || command -v pacman &>/dev/null; then
+    distro="arch/manjaro/pacman"
+  fi
+  case distro in
+  debian/ubuntu/apt-based)
+    printf "\n${WHITE}Installing dependencies with apt...${NC}\n\n"
+    $sudo apt install -y curl wget bash
+    rm -f update*.deb
+    printf "\n${WHITE}Downloading ${CYAN}${BOLD}update${NC}${WHITE}...${NC}\n\n"
+    LATEST=$(curl -s https://api.github.com/repos/Crilum/update/releases/latest | grep -oP '"tag_name": "\K(.*)(?=")')
+    curl -s https://api.github.com/repos/Crilum/update/releases/latest |
+      grep browser_download_url |
+      grep 'all.deb"' |
+      cut -d '"' -f 4 |
+      xargs -n 1 curl -L -s -o update_${LATEST}_all.deb
+    $sudo apt install -yf ./update_${LATEST}_all.deb
+    rm update_${LATEST}_all.deb
+    ;;
+  redhat/fedora/centos/dnf-based)
+    printf "\n${WHITE}Installing dependencies with dnf...${NC}\n\n"
+    sudo dnf install -y curl wget bash
+    rm -f update*.rpm
+    printf "\n${WHITE}Downloading ${CYAN}${BOLD}update${NC}${WHITE}...${NC}\n\n"
+    LATEST=$(curl -s https://api.github.com/repos/Crilum/update/releases/latest | grep -oP '"tag_name": "\K(.*)(?=")')
+    curl -s https://api.github.com/repos/Crilum/update/releases/latest |
+      grep browser_download_url |
+      grep 'all.rpm"' |
+      cut -d '"' -f 4 |
+      xargs -n 1 curl -L -s -o update_${LATEST}_all.rpm
+    $sudo dnf install -y ./update_${LATEST}_all.rpm
+    rm update_${LATEST}_all.rpm
+    ;;
+  *)
+    if ! command -v curl &>/dev/null || ! command -v chmod &>/dev/null || ! command -v wget &>/dev/null || ! command -v git &>/dev/null; then
+      echo "${LIRED}Error: Missing dependencies! Please install \`curl\`, \`wget\`, \`git\`, and of course, \`bash\` (If you got this far, you should already have it installed).${NC}"
+      exit 1
+    fi
+    LATEST=$(curl -s https://api.github.com/repos/Crilum/update/releases/latest | grep -oP '"tag_name": "\K(.*)(?=")')
+    printf "\n${WHITE}Downloading ${CYAN}${BOLD}update${NC}${WHITE}...${NC}\n\n"
+    cd /tmp/
+    git clone https://github.com/Crilum/update -b $LATEST
+    cd /tmp/update
+    $sudo cp update /usr/local/bin/
+    $sudo chmod +x /usr/local/bin/update
+    ;;
+  esac
+  ;;
+Darwin)
+  if ! command -v curl &>/dev/null || ! command -v chmod &>/dev/null || ! command -v wget &>/dev/null || ! command -v git &>/dev/null; then
+    if ! command -v homebrew &>/dev/null; then
+      printf "\n${WHITE}Update needs some dependencies (curl, chmod, git, and wget). Do you want to install Homebrew (for installing dependencies)? [Y/n] ${LIBLUE}"
+      read instHomebrew
+      if [[ $instHomebrew =~ "yYYesyesYES" ]]; then
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+      else
+        printf "\n${RED}User error: user chose not to install Homebrew!"
+      fi
+    fi
+    printf "\n${WHITE}Installing dependencies with Homebrew...${NC}\n\n"
+    brew install curl chmod wget git
+  fi
+  LATEST=$(curl -s https://api.github.com/repos/Crilum/update/releases/latest | grep -oP '"tag_name": "\K(.*)(?=")')
+  printf "\n${WHITE}Downloading ${CYAN}${BOLD}update${NC}${WHITE}...${NC}\n\n"
+  cd /tmp/
+  git clone https://github.com/Crilum/update -b $LATEST
+  cd /tmp/update
+  $sudo cp update /usr/local/bin/
+  $sudo chmod +x /usr/local/bin/update
+  ;;
+*)
+  echo "${LIRED}Error: you are not running a suppoted system (Linux or MacOS)! If you are, please file a bug report at https://github.com/Crilum/update/issues/new.${NC}"
+  exit 1
+  ;;
+esac
+
 printf "${GREEN}All finished installing!\n${WHITE}Try \'${CYAN}${BOLD}update ${YELLOW}help${WHITE}\' to learn how to use ${CYAN}${BOLD}update${WHITE}!${NC}\n"
