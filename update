@@ -117,8 +117,10 @@ function upd_pi_apps() {
         error 'I couldn'\''t find the pi-apps updater script.. Something is wrong!\n'
     fi
 
-    $HOME/pi-apps/updater set-status &>/dev/null &
     $HOME/pi-apps/updater cli-yes
+    status "Setting status..."
+    $HOME/pi-apps/updater set-status &>/dev/null
+    status -g "Done!"
 }
 
 function upd_snaps() {
