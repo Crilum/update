@@ -6,6 +6,6 @@ License: gpl-3.0
 Architecture: all
 Provides: update
 Priority: optional
-Depends: bash
+Depends: bash, wget, curl
 Section: utils
 Package: update
