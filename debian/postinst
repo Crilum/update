@@ -1,3 +1,9 @@
 #!/bin/bash
 chmod +x /usr/bin/update
+if [ ! -e "/usr/bin/up" ]; then
+ln -s /usr/bin/update /usr/bin/up
+chmod +x /usr/bin/up
+else
+echo "Warning: The \`up\` command was not created, because the file '/usr/bin/up' already exists. Use \`update\` instead."
+fi
 exit 0
