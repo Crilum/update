@@ -356,6 +356,7 @@ fi
 case $1 in
 version | -v | --version) ;;
 help | -h | --help | \?) ;;
+self-update | -u | --self-update ;;
 *) upd_upd_script on-start ;;
 esac
 
