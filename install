@@ -137,9 +137,9 @@ Darwin)
   $sudo chmod +x /usr/local/bin/update
   ;;
 *)
-  echo "${LIRED}Error: you are not running a suppoted system (Linux or MacOS)! If you are, please file a bug report at https://github.com/Crilum/update/issues/new.${NC}"
+  echo "${LIRED}Error: you are not running a suppoted system (supported systems are: Linux or MacOS)! If you are, please file a bug report at https://github.com/Crilum/update/issues/new.${NC}"
   exit 1
   ;;
 esac
 
-printf "${GREEN}All finished installing!\n${WHITE}Try \'${CYAN}${BOLD}update ${YELLOW}help${WHITE}\' to learn how to use ${CYAN}${BOLD}update${WHITE}!${NC}\n"
+printf "${GREEN}All finished installing!\n${WHITE}Try \'${CYAN}${BOLD}update ${YELLOW}help${WHITE}\' (or, \'${LICYAN}up${NC} ${YELLOW}help${WHITE}\') to learn how to use ${CYAN}${BOLD}update${WHITE}!${NC}\n"
