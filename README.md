@@ -85,10 +85,28 @@ This should work for most systems (Apt-based distros (not Alpine Linux, yet..), 
 </details>
 
 # Uninstall
-Just remove the script:
+Just uninstall the package:
+
+### Apt based distros:
 
 ```
-sudo rm /usr/bin/update
+sudo apt remove update
+```
+
+### DNF based distros:
+
+I'm not sure exactly what the command for removing the Alien package is, but it might look something like this:
+```
+sudo alien -r update
+```
+### Other linux:
+```
+sudo rm -f /usr/bin/update /usr/bin/up
+```
+### MacOS:
+
+```
+sudo rm -f /usr/local/bin/update /usr/local/bin/up
 ```
 
 and you're done!
