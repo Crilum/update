@@ -154,10 +154,10 @@ function upd_upd_script() {
     updateAvailable="no"
     if [ "$latestRelease" \> "$versionNoV" ]; then
         if [ "$1" == "on-start" ]; then
-            status -C "There's an update available! ${WHITE}Run ${LICYAN}update ${YELLOW}-u${WHITE} to intall it."
+            status -C "There's an update available! ${WHITE}Run ${LICYAN}update ${YELLOW}-u${WHITE} to install it."
             updateAvailable="yes"
         else
-            status -C "There's an update available! Do you want to install it? [Y/n] "
+            echo -en "${LICYAN}There's an update available! Do you want to install it? [Y/n] "
             read confInstallUpdate
             updateAvailable="yes"
             case $confInstallUpdate in
