@@ -108,7 +108,8 @@ Linux)
     git clone https://github.com/Crilum/update -b $LATEST
     cd /tmp/update
     $sudo cp update /usr/local/bin/
-    $sudo chmod +x /usr/local/bin/update
+    $sudo ln -s /usr/local/bin/update /usr/local/bin/up
+    $sudo chmod +x /usr/local/bin/update /usr/local/bin/up
     ;;
   esac
   ;;
@@ -121,6 +122,7 @@ Darwin)
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
       else
         printf "\n${RED}User error: user chose not to install Homebrew!"
+        exit 1
       fi
     fi
     printf "\n${WHITE}Installing dependencies with Homebrew...${NC}\n\n"
@@ -132,7 +134,8 @@ Darwin)
   git clone https://github.com/Crilum/update -b $LATEST
   cd /tmp/update
   $sudo cp update /usr/local/bin/
-  $sudo chmod +x /usr/local/bin/update
+  $sudo ln -s /usr/local/bin/update /usr/local/bin/up
+  $sudo chmod +x /usr/local/bin/update /usr/local/bin/up
   ;;
 *)
   echo "${LIRED}Error: you are not running a suppoted system (supported systems are: Linux or MacOS)! If you are, please file a bug report at https://github.com/Crilum/update/issues/new.${NC}"
