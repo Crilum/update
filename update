@@ -173,7 +173,7 @@ function upd_upd_script() {
         fi
     elif [ "$latestRelease" \< "$versionNoV" ]; then
         if [ "$1" != "on-start" ]; then
-            status "Looks like you're developing an update, and haven't released it yet. Cool!\n(Or your version got messed up somehow...)"
+            status -g "Looks like you're developing an update, and haven't released it yet. ${LICYAN}Cool${WHITE}!\n(Or your version got messed up somehow...)"
             updateAvailable="no"
         fi
         updateAvailable="no"
