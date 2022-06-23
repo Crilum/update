@@ -1,6 +1,6 @@
 #!/bin/bash
 
-version="v1.3.7"
+version="v1.3.8"
 
 #Color Variables
 
@@ -195,7 +195,7 @@ function upd_flatpak() {
     fi
     if [ "$1" == "all" ]; then
         status '\nFlatpak output:\n'
-        flatpak update || warning 'I couldn'\''t update flatpak apps! flatpak will probably have an error above.'
+        flatpak update -y || warning 'I couldn'\''t update flatpak apps! flatpak will probably have an error above.'
     else
         if [ "$pkgs" != "" ]; then
             errMsg="I wasn't able to upgrade: $pkgs!"
@@ -203,7 +203,7 @@ function upd_flatpak() {
             errMsg="I wasn't able to upgrade Flatpak apps!"
         fi
         status '\nFlatpak output:\n'
-        flatpak update $pkgs || error "$errMsg"
+        flatpak update $pkgs -y || error "$errMsg"
     fi
 }
 

@@ -92,7 +92,8 @@ Linux)
     ;;
   "fedora")
     printf "\n${WHITE}Installing dependencies with dnf...${NC}\n\n"
-    sudo dnf install -y curl wget bash alien
+    $sudo dnf -y update
+    $sudo dnf install -y curl wget bash alien
     rm -f update*.rpm
     printf "\n${WHITE}Downloading ${CYAN}${BOLD}update${NC}${WHITE}...${NC}\n\n"
     LATEST=$(curl -s https://api.github.com/repos/Crilum/update/releases/latest | grep -oP '"tag_name": "\K(.*)(?=")')
@@ -104,10 +105,18 @@ Linux)
     if command -v update &>/dev/null; then
       printf "\n${WHITE}Uninstalling update...${NC}"
       $sudo dpkg remove -y update
+      echo -e "${WHITE}Removing \`${LICYAN}up${WHITE}\` command... (If you have a \`/usr/bin/up\` file that you care about, you might want to copy it somewhere safe!)\n\nWaiting 10 seconds...${NC}"
       printf "\n${GREEN}Done!${NC}"
     fi
     printf "\n${WHITE}Installing update...${NC}"
-    $sudo alien -i --scripts ./update.${LATEST}-2.noarch.rpm
+    $sudo alien -i ./update.${LATEST}-2.noarch.rpm
+    $sudo chmod +x /usr/bin/update
+    if [ ! -e "/usr/bin/up" ]; then
+      $sudo ln -s /usr/bin/update /usr/bin/up
+      $sudo chmod +x /usr/bin/up
+    else
+      echo "${YELLOW}Warning: The \`${LICYAN}up${YELLOW}}\` command was not created, because the file '${WHITE}/usr/bin/up${YELLOW}' already exists. Use \`${LICYAN}update${YELLOW}\` instead."
+    fi
     printf "\n${GREEN}Done!${NC}\n"
     rm update.${LATEST}-2.noarch.rpm
     ;;
@@ -121,9 +130,9 @@ Linux)
     cd /tmp/
     git clone https://github.com/Crilum/update -b $LATEST
     cd /tmp/update
-    $sudo cp -f update /usr/local/bin/
-    $sudo ln -sf /usr/local/bin/update /usr/local/bin/up
-    $sudo chmod +x /usr/local/bin/update /usr/local/bin/up
+    $sudo cp -f update /usr/bin/
+    $sudo ln -sf /usr/bin/update /usr/bin/up
+    $sudo chmod +x /usr/bin/update /usr/bin/up
     ;;
   esac
   ;;
