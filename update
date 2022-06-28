@@ -340,7 +340,7 @@ flags for ${LICYAN}update${WHITE}:
       ${YELLOW}${BOLD}--no-grep-args${NC}                 	   ${WHITE}If this flag is specified, ${LICYAN}update${WHITE} won't remove arguments that are also packages from the update package list, i.e. 'apt'
 ${NC}"
     if [ "$(whoami)" == "root" ]; then
-        echo -e "${LIRED}Note: \`${LICYAN}update${LIRED}\` is not meant to be run with \`${WHITE}sudo${LIRED}\`. Although \`${LICYAN}update${LIRED}\` can be run with \`${WHITE}sudo${LIRED}\`, it is not recommended.\n"
+        echo -e "${LIRED}Note: \`${LICYAN}update${LIRED}\` is not meant to be run with \`${WHITE}sudo${LIRED}\`. Although \`${LICYAN}update${LIRED}\` can be run with \`${WHITE}sudo${LIRED}\`, it is not recommended.\n${NC}"
     fi
     upd_upd_script on-start
 }
