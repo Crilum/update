@@ -1,6 +1,6 @@
 #!/bin/bash
 
-version="v1.3.9"
+version="v1.4.0"
 
 #Color Variables
 
@@ -338,7 +338,7 @@ ${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}version · -v · --version${NC}       
 flags for ${LICYAN}update${WHITE}:
 
       ${YELLOW}${BOLD}--no-grep-args${NC}                 	   ${WHITE}If this flag is specified, ${LICYAN}update${WHITE} won't remove arguments that are also packages from the update package list, i.e. 'apt'
-"
+${NC}"
     if [ "$(whoami)" == "root" ]; then
         echo -e "${LIRED}Note: \`${LICYAN}update${LIRED}\` is not meant to be run with \`${WHITE}sudo${LIRED}\`. Although \`${LICYAN}update${LIRED}\` can be run with \`${WHITE}sudo${LIRED}\`, it is not recommended.\n"
     fi
@@ -399,6 +399,6 @@ dnf | -d | --dnf)
     printf "${CYAN}${BOLD}\nWelcome to Crilum\'s Update Script!\n${NC}"
     upd_dnf
     ;;
-version | -v | --version) echo -e "${LICYAN}${version}" ;;
+version | -v | --version) echo -e "${LICYAN}${version}${NC}" ;;
 *) error "Either you didn't specify a option/argument, or you didn't specify a valid one!" ;;
 esac
