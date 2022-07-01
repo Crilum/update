@@ -87,39 +87,39 @@ Linux)
     fi
     printf "\n${WHITE}Installing update...${NC}"
     $sudo apt install -yf ./update_${LATEST}_all.deb
-    printf "\n${GREEN}Done!${NC}"
+    printf "\n${GREEN}Done!${NC}\n"
     rm update_${LATEST}_all.deb
     ;;
-  "fedora")
-    printf "\n${WHITE}Installing dependencies with dnf...${NC}\n\n"
-    $sudo dnf -y update
-    $sudo dnf install -y curl wget bash alien
-    rm -f update*.rpm
-    printf "\n${WHITE}Downloading ${CYAN}${BOLD}update${NC}${WHITE}...${NC}\n\n"
-    LATEST=$(curl -s https://api.github.com/repos/Crilum/update/releases/latest | grep -oP '"tag_name": "\K(.*)(?=")')
-    curl -s https://api.github.com/repos/Crilum/update/releases/latest |
-      grep browser_download_url |
-      grep 'noarch.rpm"' |
-      cut -d '"' -f 4 |
-      xargs -n 1 curl -L -s -o update.${LATEST}-2.noarch.rpm
-    if command -v update &>/dev/null; then
-      printf "\n${WHITE}Uninstalling update...${NC}"
-      $sudo dpkg remove -y update
-      echo -e "${WHITE}Removing \`${LICYAN}up${WHITE}\` command... (If you have a \`/usr/bin/up\` file that you care about, you might want to copy it somewhere safe!)\n\nWaiting 10 seconds...${NC}"
-      printf "\n${GREEN}Done!${NC}"
-    fi
-    printf "\n${WHITE}Installing update...${NC}"
-    $sudo alien -i ./update.${LATEST}-2.noarch.rpm
-    $sudo chmod +x /usr/bin/update
-    if [ ! -e "/usr/bin/up" ]; then
-      $sudo ln -s /usr/bin/update /usr/bin/up
-      $sudo chmod +x /usr/bin/up
-    else
-      echo "${YELLOW}Warning: The \`${LICYAN}up${YELLOW}}\` command was not created, because the file '${WHITE}/usr/bin/up${YELLOW}' already exists. Use \`${LICYAN}update${YELLOW}\` instead."
-    fi
-    printf "\n${GREEN}Done!${NC}\n"
-    rm update.${LATEST}-2.noarch.rpm
-    ;;
+  #"fedora")
+  #  printf "\n${WHITE}Installing dependencies with dnf...${NC}\n\n"
+  #  $sudo dnf -y update
+  #  $sudo dnf install -y curl wget bash alien
+  #  rm -f update*.rpm
+  #  printf "\n${WHITE}Downloading ${CYAN}${BOLD}update${NC}${WHITE}...${NC}\n\n"
+  #  LATEST=$(curl -s https://api.github.com/repos/Crilum/update/releases/latest | grep -oP '"tag_name": "\K(.*)(?=")')
+  #  curl -s https://api.github.com/repos/Crilum/update/releases/latest |
+  #    grep browser_download_url |
+  #    grep 'noarch.rpm"' |
+  #    cut -d '"' -f 4 |
+  #    xargs -n 1 curl -L -s -o update.${LATEST}-2.noarch.rpm
+  #  if command -v update &>/dev/null; then
+  #    printf "\n${WHITE}Uninstalling update...${NC}"
+  #    $sudo dpkg remove -y update
+  #    echo -e "${WHITE}Removing \`${LICYAN}up${WHITE}\` command... (If you have a \`/usr/bin/up\` file that you care about, you might want to copy it somewhere safe!)\n\nWaiting 10 seconds...${NC}"
+  #    printf "\n${GREEN}Done!${NC}"
+  #  fi
+  #  printf "\n${WHITE}Installing update...${NC}"
+  #  $sudo alien -i ./update.${LATEST}-2.noarch.rpm
+  #  $sudo chmod +x /usr/bin/update
+  #  if [ ! -e "/usr/bin/up" ]; then
+  #    $sudo ln -s /usr/bin/update /usr/bin/up
+  #    $sudo chmod +x /usr/bin/up
+  #  else
+  #    echo "${YELLOW}Warning: The \`${LICYAN}up${YELLOW}}\` command was not created, because the file '${WHITE}/usr/bin/up${YELLOW}' already exists. Use \`${LICYAN}update${YELLOW}\` instead."
+  #  fi
+  #  printf "\n${GREEN}Done!${NC}\n"
+  #  rm update.${LATEST}-2.noarch.rpm
+  #  ;;
   *)
     if ! command -v curl &>/dev/null || ! command -v chmod &>/dev/null || ! command -v wget &>/dev/null || ! command -v git &>/dev/null; then
       echo -e "${LIRED}Error: Missing dependencies! Please install \`curl\`, \`wget\`, \`git\`, and of course, \`bash\` (If you got this far, you should already have it installed).${NC}"
