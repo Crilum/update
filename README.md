@@ -94,13 +94,6 @@ This should work for most systems (Apt-based distros (not Alpine Linux, yet..), 
 sudo apt remove update
 ```
 
-#### DNF based distros:
-
-I'm not sure exactly what the command for removing the Alien package is, but it might look something like this:
-```
-sudo alien -r update
-```
-
 ### Or, if your system doesn't have an update package:
 
 #### Other linux:
