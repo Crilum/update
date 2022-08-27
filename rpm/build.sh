@@ -6,6 +6,17 @@ declare -r NAME="update"
 declare -r BUILD_DIR="$(pwd)"
 declare -r VERSION="$(grep "version=" "${BUILD_DIR}/${NAME}" | cut -d"\"" -f2 | cut -d"v" -f2)"
 
+if command -v dnf &>/dev/null; then
+   command -v rpmdev-setuptree &> /dev/null && command -v rpmbuild &>/dev/null || sudo dnf install rpm-build rpmdevtools -y
+elif command -v yum &>/dev/null; then
+   command -v rpmdev-setuptree &> /dev/null && command -v rpmbuild &>/dev/null || sudo yum install rpm-build rpmdevtools -y
+elif command -v apt &>/dev/null; then
+   command -v rpmbuild &>/dev/null || sudo apt install rpm -y
+else
+   printf 'No suitable package manager found!! Exiting...'
+   exit 1
+fi
+
 # Exit out when running the script as root.
 if [[ ${UID} -eq 0 ]]; then
    printf 'Please run this script as a normal user.'
