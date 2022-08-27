@@ -6,7 +6,7 @@ declare -r NAME="update"
 declare -r BUILD_DIR="$(pwd)"
 declare -r VERSION="$(grep "version=" "${BUILD_DIR}/${NAME}" | cut -d"\"" -f2 | cut -d"v" -f2)"
 
-echo "name: $NAME, build dir: $BUILD_DIR, version: $version, Dir contents:"; ls; echo "../ contents:"; ls ../; ls ../../; file "${BUILD_DIR}/${NAME}"
+echo "name: $NAME, build dir: $BUILD_DIR, version: $VERSION, Dir contents:"; ls; echo "../ contents:"; ls ../; ls ../../; file "${BUILD_DIR}/${NAME}"
 
 if command -v dnf &>/dev/null; then
    command -v rpmdev-setuptree &> /dev/null && command -v rpmbuild &>/dev/null || sudo dnf install rpm-build rpmdevtools -y
