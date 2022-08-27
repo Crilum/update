@@ -73,6 +73,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          file: '${{ HOME }}/rpmbuild/RPMS/noarch/*.rpm'
+          file: '/home/runner/rpmbuild/RPMS/noarch/*.rpm'
           type: 'application/x-rpm'
 
