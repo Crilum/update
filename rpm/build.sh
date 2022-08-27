@@ -29,8 +29,11 @@ mkdir -p "${HOME}/rpmbuild/BUILD/${NAME}-${VERSION}"
 mkdir -p "${BUILD_DIR}/${NAME}-${VERSION}"
 
 # Create the tarball.
+echo "Creating tarball..."
 cp -r "${BUILD_DIR}/${NAME}" "${BUILD_DIR}/${NAME}-${VERSION}"
-ln -s /usr/bin/update "${BUILD_DIR}/${NAME}-${VERSION}/up"
+echo "Linking update to up..."
+ln -s /usr/bin/update "${BUILD_DIR}/${NAME}-${VERSION}/up" || echo "failed to link update to up!"
+echo "Done!"
 tar --create --file "${NAME}-${VERSION}.tar.gz" "${NAME}-${VERSION}"
 
 # Move the tarball to the SOURCES directory.
