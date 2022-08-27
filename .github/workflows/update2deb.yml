@@ -68,6 +68,9 @@ jobs:
           cd update
           ./rpm/build.sh
           cp "$HOME"/rpmbuild/RPMS/noarch/*.rpm .
+          ls
+          ls $GITHUBWORKSPACE
+          
       - name: Upload RPM to release
         uses: docker://gacts/upload-to-release:latest
         env:
