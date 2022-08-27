@@ -21,10 +21,9 @@ Updates apps/packages/dependencies from Apt, Pi-Apps, Flatpak, the Snap Store, H
 %install
 rm -rf $RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT/%{_bindir}
-ls
 cp %{name} $RPM_BUILD_ROOT/%{_bindir}
-ls
-cp ./up $RPM_BUILD_ROOT/%{_bindir}
+cp up $RPM_BUILD_ROOT/%{_bindir}
+
 
 %clean
 rm -rf $RPM_BUILD_ROOT
