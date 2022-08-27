@@ -47,7 +47,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          file: '${{ env.DIR }}/update/${{ env.DEB }}'
+          file: '${{ GITHUB_WORKSPACE }}/update/${{ env.DEB }}'
           type: 'application/x-debian-package'
           
   create-update-rpm:
