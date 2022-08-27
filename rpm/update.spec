@@ -8,7 +8,9 @@ Summary:        Updates apps/packages/dependencies from Apt, Pi-Apps, Flatpak, t
 License:        GPLv3
 Source0:        %{name}-%{version}.tar.gz
 
-Requires: bash, wget, curl
+Requires: bash
+Requires: curl
+Requires: wget
 
 %description
 Updates apps/packages/dependencies from Apt, Pi-Apps, Flatpak, the Snap Store, Homebrew, and NPM.
