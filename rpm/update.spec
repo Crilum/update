@@ -23,8 +23,8 @@ rm -rf $RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT/%{_bindir}
 ls
 cp %{name} $RPM_BUILD_ROOT/%{_bindir}
-ls; dirname
-cp up $RPM_BUILD_ROOT/%{_bindir}
+ls
+cp ./up $RPM_BUILD_ROOT/%{_bindir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
