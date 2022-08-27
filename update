@@ -336,7 +336,7 @@ ${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}snaps · -s · --snaps [snaps]${NC}   
 ${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}flatpak · -f · --flatpak [packages] ${NC}${WHITE}Updates flatpak apps
 ${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}homebrew · -H · --homebrew${NC}          ${WHITE}Updates Homebrew apps
 ${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}pacman · -c · --pacman [packages]   ${NC}${WHITE}Updates pacman apps
-${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}dnf · -d · --dnf${NC}       	           ${WHITE}Updates dnf packages
+${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}dnf · -d · --dnf${NC}       	           ${WHITE}Updates dnf packages (or yum, if your OS is that old)
 ${CYAN}${BOLD}update ${YELLOW}${BOLD}self-update · -u · --self-update${NC}    ${WHITE}Updates the ${CYAN}${BOLD}update ${WHITE}script
 ${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}help · -h · --help${NC}       	   ${WHITE}Displays this help
 ${CYAN}${BOLD}update${NC} ${YELLOW}${BOLD}version · -v · --version${NC}       	   ${WHITE}Prints version
