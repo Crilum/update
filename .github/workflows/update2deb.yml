@@ -58,7 +58,9 @@ jobs:
     steps:
   
       - name: save working directory in variable 'DIR'
-        run: echo "DIR=$(pwd)" >> $GITHUB_ENV
+        run: |
+          echo "DIR=$(pwd)" >> $GITHUB_ENV
+          echo "VER=$(curl -s https://api.github.com/repos/Crilum/update/releases/latest | grep -oP '\"tag_name\": \'\K(.*)(?=\")' | tr -d 'v')" >> $GITHUB_ENV
 
       - name: Clone repo
         run: git clone https://github.com/Crilum/update
@@ -73,6 +75,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          file: '/home/runner/rpmbuild/RPMS/noarch/*.rpm'
+          file: '/home/runner/rpmbuild/RPMS/noarch/update-${{ env.VER }}-1.noarch.rpm'
           type: 'application/x-rpm'
 
