@@ -1,6 +1,6 @@
 #!/bin/bash
 
-version="v1.4.3.1"
+version="v1.4.4"
 
 #Color Variables
 
@@ -85,8 +85,10 @@ function status() {
 }
 
 function internet_check() {
+    if ! command -v wget &>/dev/null; then
+        error "\`wget\` isn't installed! wget is required to perform connection tests. Please install wget."
     if ! wget --spider "https://github.com" &>/dev/null; then
-        error "I tried to contact ${BLUE}${BOLD}https://github.com${RED} but it did not respond! Check your internet connection!"
+        error "I tried to contact ${BLUE}${BOLD}https://github.com${LIRED} but it did not respond! Check your internet connection!"
     fi
 }
 
@@ -291,15 +293,19 @@ function upd_npm() {
 }
 
 function upd_dnf() {
-    if ! command -v dnf &>/dev/null; then
-        status "I couldn't find dnf, so I'm assuming you're not running Fedora or a derivative of it. Not using dnf."
+    if command -v dnf &>/dev/null; then
+      pkg_manager="dnf"
+    elif command -v yum &>/dev/null; then
+      pkg_manager="yum"
+    else
+        status "I couldn't find dnf (or yum), so I'm assuming you're not running Fedora or a derivative of it. Not using dnf."
         return
     fi
     if [ "$1" == "all" ]; then
-        $sudo dnf upgrade $pkgs
+        $sudo $pkg_manager upgrade $pkgs
     else
         internet_check
-        $sudo dnf upgrade $pkgs
+        $sudo $pkg_manager upgrade $pkgs
     fi
 }
 function upd_all() {
