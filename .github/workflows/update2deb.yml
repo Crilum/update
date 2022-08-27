@@ -68,11 +68,13 @@ jobs:
           cd update
           ./rpm/build.sh
           cp "$HOME"/rpmbuild/RPMS/noarch/*.rpm .
+          echo "RPM=$(basename update*.rpm)" >> $GITHUB_ENV
+          ls /github/workspace/
       - name: Upload RPM to release
         uses: docker://gacts/upload-to-release:latest
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          file: '${{ github.workspace }}/*.rpm'
+          file: '${{ env.RPM }}'
           type: 'application/x-rpm'
 
