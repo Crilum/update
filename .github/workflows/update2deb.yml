@@ -73,6 +73,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          file: '${{ env.DIR }}/*.rpm'
+          file: '${{ env.DIR }}/update/*.rpm'
           type: 'application/x-rpm'
 
