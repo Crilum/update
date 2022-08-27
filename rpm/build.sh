@@ -23,9 +23,6 @@ if [[ ${UID} -eq 0 ]]; then
    exit 1
 fi
 
-# Install the necessary packages when needed.
-command -v rpmdev-setuptree &> /dev/null || sudo dnf install rpm-build rpmdevtools
-
 # Create the necessary directories.
 mkdir -p "${HOME}/rpmbuild/"{BUILD,BUILDROOT,RPMS,SOURCES,SPECS,SRPMS}
 mkdir -p "${HOME}/rpmbuild/BUILD/${NAME}-${VERSION}"
