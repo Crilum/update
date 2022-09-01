@@ -87,7 +87,7 @@ function status() {
 function internet_check() {
     if ! command -v wget &>/dev/null; then
         error "\`wget\` isn't installed! wget is required to perform connection tests. Please install wget."
-    if ! wget --spider "https://github.com" &>/dev/null; then
+    elif ! wget --spider "https://github.com" &>/dev/null; then
         error "I tried to contact ${BLUE}${BOLD}https://github.com${LIRED} but it did not respond! Check your internet connection!"
     fi
 }
