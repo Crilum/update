@@ -1,5 +1,5 @@
 #!/bin/bash
-if [[ "$(file /usr/bin/up)" =~ "symbolic link to /usr/bin/update" ]]; then
+if [[ -L "/usr/bin/up" ]]; then
   rm -rf /usr/bin/up
 else
   echo "It looks like your '/usr/bin/up' file isn't a symbolic link to '/usr/bin/update', so it hasn't been removed. If you stil want to remove it, you can do so with: sudo rm -f /usr/bin/up"
