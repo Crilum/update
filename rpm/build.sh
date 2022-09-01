@@ -33,8 +33,6 @@ mkdir -p "${BUILD_DIR}/${NAME}-${VERSION}"
 # Create the tarball.
 echo "Creating tarball..."
 cp -r "${BUILD_DIR}/${NAME}" "${BUILD_DIR}/${NAME}-${VERSION}"
-echo "Linking update to up..."
-ln -v -s /usr/bin/update "${BUILD_DIR}/${NAME}-${VERSION}/up" || echo "failed to link update to up!"
 echo "Done!"; ls "${BUILD_DIR}/${NAME}-${VERSION}/"
 tar --create --file "${NAME}-${VERSION}.tar.gz" "${NAME}-${VERSION}"
 
