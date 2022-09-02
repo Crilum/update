@@ -406,5 +406,7 @@ dnf | -d | --dnf)
     upd_dnf
     ;;
 version | -v | --version) echo -e "${LICYAN}${version}${NC}" ;;
-*) error "Either you didn't specify a option/argument, or you didn't specify a valid one!" ;;
+*)  printf "${CYAN}${BOLD}\nWelcome to Crilum\'s Update Script!\n${NC}"
+    upd_all
+    ;;
 esac
