@@ -1,5 +1,5 @@
 Name:           update
-Version:        VERSION THE SCRIPT WILL UPDATE THIS!
+Version:        1.4.5
 Release:        1%{?dist}
 BuildArch:      noarch
 URL:            https://github.com/Crilum/%{name}
@@ -25,7 +25,7 @@ cp %{name} $RPM_BUILD_ROOT/%{_bindir}
 
 %post
 [[ -L %{_bindir}/up ]] && rm -rf %{_bindir}/up
-ln -v -s %{_bindir}/update %{_bindir}/up
+[[ $(ls -l $(command -v up)) =~ "/usr/bin/update" ]] || ln -v -s /usr/bin/update "/usr/bin/up"
 
 %postun
 [[ -L %{_bindir}/up ]] && rm -rf %{_bindir}/up
