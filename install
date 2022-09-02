@@ -109,14 +109,10 @@ Linux)
     if command -v update &>/dev/null; then
       printf "\n${WHITE}Uninstalling update...${NC}"
       $sudo $pkg_manager remove -y update
-      echo -e "${WHITE}Removing \`${LICYAN}up${WHITE}\` command... (If you have a \`/usr/bin/up\` file that you care about, you might want to copy it somewhere safe!)\n\nWaiting 10 seconds...${NC}"
-      sudo rm -f /usr/bin/up
       printf "\n${GREEN}Done!${NC}"
     fi
     printf "\n${WHITE}Installing update...${NC}"
     $sudo $pkg_manager install ./update-${LATEST}-1.noarch.rpm -y
-    $sudo chmod +x /usr/bin/update
-    $sudo chmod +x /usr/bin/up
     printf "\n${GREEN}Done!${NC}\n"
     rm update-${LATEST}-1.noarch.rpm
     ;;
