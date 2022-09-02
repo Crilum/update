@@ -29,6 +29,7 @@ cp %{name} $RPM_BUILD_ROOT/%{_bindir}
 
 %postun
 [[ -L %{_bindir}/up ]] && rm -rf %{_bindir}/up
+exit 0
 
 %clean
 rm -rf $RPM_BUILD_ROOT
