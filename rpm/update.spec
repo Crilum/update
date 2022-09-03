@@ -1,5 +1,5 @@
 Name:           update
-Version:        1.4.5
+Version:        VERSION THE SCRIPT WILL UPDATE THIS!
 Release:        1%{?dist}
 BuildArch:      noarch
 URL:            https://github.com/Crilum/%{name}
