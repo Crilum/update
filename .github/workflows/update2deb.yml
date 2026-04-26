@@ -23,10 +23,10 @@ jobs:
 
       - name: Clone repo
         run: git clone https://github.com/Crilum/update
-      # Runs a single command using the runners shell
-      - name: Build DEB and RPM
+
+      - name: Build DEB
         run: |
-          LATEST=`curl -s https://api.github.com/repos/Crilum/update/releases/latest | grep -oP '"tag_name": "\K(.*)(?=")' | tr -d 'v'`
+          LATEST=$(curl -s https://api.github.com/repos/Crilum/update/releases/latest | grep -oP '"tag_name": "\K(.*)(?=")' | tr -d 'v')
           cd update
           mkdir updatedeb && cd updatedeb
           mkdir -p usr/bin/
@@ -41,15 +41,17 @@ jobs:
           cd ..
           dpkg-deb --build updatedeb update_${LATEST}_all.deb
           echo "DEB=$(basename update*.deb)" >> $GITHUB_ENV
-          
+
       - name: Upload DEB to release
-        uses: docker://gacts/upload-to-release:latest
+        uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          file: '${{ env.DIR }}/update/${{ env.DEB }}'
-          type: 'application/x-debian-package'
-          
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ${{ env.DIR }}/update/${{ env.DEB }}
+          asset_name: ${{ env.DEB }}
+          asset_content_type: application/x-debian-package
+
   create-update-rpm:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
@@ -71,11 +73,14 @@ jobs:
           ./rpm/build.sh
           cp "$HOME"/rpmbuild/RPMS/noarch/*.rpm .
           echo "RPM=$(basename update*.rpm)" >> $GITHUB_ENV
+
       - name: Upload RPM to release
-        uses: docker://gacts/upload-to-release:latest
+        uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          file: '${{ env.DIR }}/update/${{ env.RPM }}'
-          type: 'application/x-rpm'
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ${{ env.DIR }}/update/${{ env.RPM }}
+          asset_name: ${{ env.RPM }}
+          asset_content_type: application/x-rpm
 
