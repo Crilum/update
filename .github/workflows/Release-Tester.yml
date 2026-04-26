@@ -41,7 +41,7 @@ jobs:
         run: |
            brew install gnu-which
            echo "Running install script..."
-           curl "https://raw.githubusercontent.com/Crilum/update/main/install-macos" | sudo bash
+           curl "https://raw.githubusercontent.com/Crilum/update/main/install" | sudo bash
            echo "Here is where Update is:"
            gwhich update
       - name: "Test Update"
