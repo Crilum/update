@@ -1,6 +1,6 @@
 #!/bin/bash
 
-version="v1.4.5"
+version="v1.4.6"
 
 #Color Variables
 
@@ -93,42 +93,38 @@ function internet_check() {
 }
 
 function upd_pi_apps() {
-    status 'Pi-Apps output:'
+    if [ -d $HOME/pi-apps ]; then
+        status 'Updating Pi-Apps...'
 
-    if [ "$(whoami)" = "root" ]; then
-        echo -e "\n\e[1;31mError: you can't update Pi-Apps as root! Please try again as normal user.\e[0m"
-        return 1
-    fi
+        if [ "$(whoami)" = "root" ]; then
+            echo -e "\n\e[1;31mError: you can't update Pi-Apps as root! Please try again as normal user.\e[0m"
+            return 1
+        fi
+        
+        if [ ! -e $HOME/pi-apps/updater ]; then
+            error 'I couldn'\''t find the pi-apps updater script.. Something is wrong!\n'
+        fi
 
-    if [ ! -d $HOME/pi-apps ]; then
-        if [[ $(cat /proc/cpuinfo | grep "Raspberry Pi") =~ "Raspberry Pi" ]]; then
+        $HOME/pi-apps/updater cli-yes
+        status "Setting status..."
+        $HOME/pi-apps/updater set-status &>/dev/null
+        status -g "Done!"
+    elif [[ $(cat /proc/cpuinfo | grep "Raspberry Pi") =~ "Raspberry Pi" ]]; then
             warning 'No Pi-Apps directory found! Do you want to install Pi-Apps? Timeout in 15 seconds... [y/n] '
             read -t 15 input
             case $input in
             y | Y | yes | Yes | YES) wget -qO- https://raw.githubusercontent.com/Botspot/pi-apps/master/install | bash || error '\nI was not able to download and run the Pi-Apps install script. Make sure you have wget installed, and an internet connection.' ;;
             *) status 'Ok, I will not install Pi-Apps.' || exit 0 ;;
             esac
-        elif [[ ! $(cat /proc/cpuinfo | grep "Raspberry Pi") =~ "Raspberry Pi" ]] || [[ ! $(arch) =~ "arm" ]] && [[ ! $(arch) =~ "aarch" ]] && [[ ! "$(uname)" == "Darwin" ]]; then
-            if [ "$1" == "all" ]; then
-            warning "I didn't find Pi-Apps, and you are not using a Raspberry Pi, or an ARM computer (your architecture is $(arch)), so I won't ask to install Pi-Apps."
-            else
-            error "I didn't find Pi-Apps, and you are not using a Raspberry Pi, or an ARM computer (your architecture is $(arch)), so I won't ask to install Pi-Apps."
-            fi
-        fi
-    elif [ ! -e $HOME/pi-apps/updater ]; then
-        error 'I couldn'\''t find the pi-apps updater script.. Something is wrong!\n'
+    elif [[ "$1" != "all" ]]; then
+        error 'I couldn'\''t find the Pi-Apps directory, and it looks like you'\''re not running this on a Raspberry Pi! If your device is compatible with Pi-Apps, you can still install it by following the instructions on the GitHub repo: https://github.com/Botspot/pi-apps'
     fi
 
-    $HOME/pi-apps/updater cli-yes
-    status "Setting status..."
-    $HOME/pi-apps/updater set-status &>/dev/null
-    status -g "Done!"
 }
 
 function upd_snaps() {
 
     if ! command -v snap &>/dev/null; then
-        status "I couldn't find snapd on your system, so I'm not using it."
         return
     fi
     if [ "$1" == "all" ]; then
@@ -192,11 +188,10 @@ function upd_upd_script() {
 
 function upd_flatpak() {
     if ! command -v flatpak &>/dev/null; then
-        status "I couldn't find Flatpak on your system, so I'm not using it."
         return
     fi
     if [ "$1" == "all" ]; then
-        status '\nFlatpak output:\n'
+        status '\nUpdating Flatpak apps...\n'
         flatpak update -y || warning 'I couldn'\''t update flatpak apps! flatpak will probably have an error above.'
     else
         if [ "$pkgs" != "" ]; then
@@ -204,14 +199,13 @@ function upd_flatpak() {
         else
             errMsg="I wasn't able to upgrade Flatpak apps!"
         fi
-        status '\nFlatpak output:\n'
+        status '\nUpdating Flatpak apps...\n'
         flatpak update $pkgs -y || error "$errMsg"
     fi
 }
 
 function upd_pacman() {
     if ! command -v pacman &>/dev/null; then
-        status "I couldn't find pacman, so I'm assuming you're not running Arch or a derivative of it. Not using pacman."
         return
     fi
     if [ "$1" == "all" ]; then
@@ -225,11 +219,10 @@ function upd_pacman() {
 
 function upd_apt() {
     if ! command -v apt &>/dev/null; then
-        status "I couldn't find apt, so I'm assuming you're not running Debian or a derivative of it. Not using apt."
         return
     fi
     if [ "$1" == "all" ]; then
-        status '\nApt output:\n'
+        status '\nAPT output:\n'
         $sudo apt update
         $sudo apt -y upgrade
         $sudo apt -y autoremove
@@ -240,7 +233,7 @@ function upd_apt() {
             errMsg="I wasn't able to upgrade apt packages!"
         fi
         internet_check
-        status '\nApt output:\n'
+        status '\nAPT output:\n'
         $sudo apt update || error "Failed to run 'apt update'!"
         $sudo apt -y upgrade $pkgs || error "$errMsg"
         $sudo apt -y autoremove
@@ -249,7 +242,6 @@ function upd_apt() {
 
 function upd_homebrew() {
     if ! brew help &>/dev/null; then
-        status "I couldn't find Homebrew on your system, so I'm not using it."
         return
     fi
     if [ "$1" == "all" ]; then
@@ -266,7 +258,6 @@ function upd_homebrew() {
 
 function upd_npm() {
     if ! command -v npm &>/dev/null; then
-        status "I couldn't find NPM on your system, so I'm not using it."
         return
     fi
     if [ "$1" == "all" ]; then
@@ -298,7 +289,6 @@ function upd_dnf() {
     elif command -v yum &>/dev/null; then
       pkg_manager="yum"
     else
-        status "I couldn't find dnf (or yum), so I'm assuming you're not running Fedora or a derivative of it. Not using dnf."
         return
     fi
     if [ "$1" == "all" ]; then
